@@ -8,8 +8,18 @@ import { Note } from '../notes-list/note.model';
 })
 export class NoteCreateComponent {
   notesList: Note[] = [];
+
+  fetchStoredNotes() {
+    const initialList = localStorage.getItem('storelist');
+    if (initialList) {
+      this.notesList = JSON.parse(initialList);
+    }
+  }
+
   onAdd(titleName: string, contentName: string) {
+    this.fetchStoredNotes();
     this.notesList.push({
+      _id: new Date().getTime().toString(),
       title: titleName,
       content: contentName,
       createdAt: new Date(),

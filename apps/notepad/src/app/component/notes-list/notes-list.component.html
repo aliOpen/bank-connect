@@ -11,7 +11,7 @@
         {{ note.createdAt | date : 'mediumDate' }}
       </p>
       <button class="btn red" (click)="onRemove(i)">Delete</button>
-      <a class="btn blue" [routerLink]="[i]">Show Detail</a>
+      <a class="btn blue" [routerLink]="[note._id]">Show Detail</a>
     </div>
   </div>
 </div>

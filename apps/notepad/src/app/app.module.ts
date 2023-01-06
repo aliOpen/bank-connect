@@ -8,6 +8,7 @@ import { NoteDetailsComponent } from './component/note-details/note-details.comp
 import { FormsModule } from '@angular/forms';
 import { NotesListComponent } from './component/notes-list/notes-list.component';
 import { NoteCreateComponent } from './component/note-create/note-create.component';
+import { ErrorComponent } from './component/error/error.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { NoteCreateComponent } from './component/note-create/note-create.compone
     NotesListComponent,
     NoteCreateComponent,
     NoteDetailsComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,6 @@ import { NoteCreateComponent } from './component/note-create/note-create.compone
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
