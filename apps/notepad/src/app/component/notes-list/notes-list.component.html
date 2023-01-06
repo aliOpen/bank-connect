@@ -1,0 +1,19 @@
+<div class="flex flex-wrap">
+  <div
+    *ngFor="let note of notesList; let i = index"
+    class="max-w-sm rounded overflow-hidden shadow-lg"
+    (click)="onCardClick()"
+  >
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">{{ note.title }}</div>
+      <p class="text-gray-700 text-base">
+        {{ note.content }}
+        {{ note.createdAt }}
+      </p>
+      <button class="btn red" (click)="onRemove(i)">Delete</button>
+      <a class="btn blue" [routerLink]="[i]">Show Detail</a>
+    </div>
+  </div>
+</div>
+
+<a class="btn blue" routerLink="/create">Add</a>
