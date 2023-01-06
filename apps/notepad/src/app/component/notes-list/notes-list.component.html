@@ -8,7 +8,7 @@
       <div class="font-bold text-xl mb-2">{{ note.title }}</div>
       <p class="text-gray-700 text-base">
         {{ note.content }}
-        {{ note.createdAt }}
+        {{ note.createdAt | date : 'mediumDate' }}
       </p>
       <button class="btn red" (click)="onRemove(i)">Delete</button>
       <a class="btn blue" [routerLink]="[i]">Show Detail</a>
