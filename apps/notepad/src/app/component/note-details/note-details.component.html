@@ -1,1 +1,39 @@
-<p>note-details works!</p>
+<div>
+  <div>
+    {{ currentNoteDetail.title }}
+    {{ currentNoteDetail.content }}
+    {{ currentNoteDetail.createdAt | date : 'mediumDate' }}
+  </div>
+
+  <div *ngFor="let todo of currentNoteDetail.todoList">
+    {{ todo.name }} {{ todo.completed }}
+  </div>
+
+  <div class="flex">
+    <div class="form-check">
+      <input
+        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+        type="checkbox"
+        id="flexCheckIndeterminate"
+        [(ngModel)]="taskCompleted"
+      />
+      <input
+        #onTodoField
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="todo"
+        type="text"
+        placeholder="To-Do"
+        [(ngModel)]="taskName"
+      />
+      <div>
+        <button class="btn blue" (click)="onAddTodo()">Add To-Do</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom scripts -->
+  <script type="text/javascript">
+    const checkbox = document.getElementById('flexCheckIndeterminate');
+    checkbox.indeterminate = true;
+  </script>
+</div>
