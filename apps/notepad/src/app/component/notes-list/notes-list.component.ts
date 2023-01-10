@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotesService } from '../../notes.service';
 import { Note } from './note.model';
 
 @Component({
@@ -9,11 +10,9 @@ import { Note } from './note.model';
 export class NotesListComponent implements OnInit {
   notesList: Note[] = [];
 
+  constructor(private notesService: NotesService) {}
   ngOnInit() {
-    const initialList = localStorage.getItem('storelist');
-    if (initialList) {
-      this.notesList = JSON.parse(initialList);
-    }
+    this.notesList = this.notesService.fetchNotes();
   }
 
   onRemove(noteIndex: number) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { arrayBuffer } from 'stream/consumers';
+import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
 import { Task } from './task.model';
 
@@ -15,14 +16,15 @@ export class NoteDetailsComponent implements OnInit {
   todos: Task[] = [];
   taskName: string = '';
   taskCompleted: boolean = false;
+  isEditable: boolean = false;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private notesService: NotesService
+  ) {}
   ngOnInit() {
     const routerUniqueId = this.route.snapshot.params['id'];
-    const initialList = localStorage.getItem('storelist');
-    if (initialList) {
-      this.notesList = JSON.parse(initialList);
-    }
+    this.notesList = this.notesService.fetchNotes();
     for (let i = 0; i < this.notesList.length; i++) {
       if (routerUniqueId === this.notesList[i]._id) {
         this.currentNoteDetail = this.notesList[i];
@@ -39,5 +41,14 @@ export class NoteDetailsComponent implements OnInit {
       completed: this.taskCompleted,
     });
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
+  }
+  onEdit() {
+    this.isEditable = true;
+  }
+  onSubmit(titleName: string, contentName: string) {
+    // this.isEditable = this.notesService.fetchNotes();
+    console.log(titleName, contentName);
+    // console.log(this.notesList);
+    // localStorage.setItem('editList', JSON.stringify(this.notesList));
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
 
 @Component({
@@ -9,15 +10,10 @@ import { Note } from '../notes-list/note.model';
 export class NoteCreateComponent {
   notesList: Note[] = [];
 
-  fetchStoredNotes() {
-    const initialList = localStorage.getItem('storelist');
-    if (initialList) {
-      this.notesList = JSON.parse(initialList);
-    }
-  }
+  constructor(private notesService: NotesService) {}
 
   onAdd(titleName: string, contentName: string) {
-    this.fetchStoredNotes();
+    this.notesList = this.notesService.fetchNotes();
     this.notesList.push({
       _id: new Date().getTime().toString(),
       title: titleName,

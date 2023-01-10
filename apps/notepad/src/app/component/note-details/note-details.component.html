@@ -1,8 +1,36 @@
 <div>
+  <div class="flex">
+    <div class="max-w-sm rounded shadow-lg">
+      <input
+        #inputTitle
+        class="text-center font-extrabold text-2xl"
+        type="text"
+        name="inputTitle"
+        [ngModel]="currentNoteDetail.title"
+        [disabled]="!isEditable"
+      />
+      <input
+        #inputContent
+        type="text"
+        name="inputContent"
+        [ngModel]="currentNoteDetail.content"
+        [disabled]="!isEditable"
+      />
+
+      <div class="text-right font-medium">
+        {{ currentNoteDetail.createdAt | date : 'mediumDate' }}
+      </div>
+    </div>
+  </div>
   <div>
-    {{ currentNoteDetail.title }}
-    {{ currentNoteDetail.content }}
-    {{ currentNoteDetail.createdAt | date : 'mediumDate' }}
+    <button type="button" class="btn blue" (click)="onEdit()">Edit</button>
+    <button
+      class="btn blue"
+      type="submit"
+      (click)="onSubmit(inputTitle.value, inputContent.value)"
+    >
+      submit
+    </button>
   </div>
 
   <div *ngFor="let todo of currentNoteDetail.todoList">
