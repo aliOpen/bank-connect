@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { arrayBuffer } from 'stream/consumers';
 import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
 import { Task } from './task.model';
@@ -14,10 +14,13 @@ export class NoteDetailsComponent implements OnInit {
   notesList: Note[] = [];
   currentNoteDetail: any;
   todos: Task[] = [];
-  taskName: string = '';
-  taskCompleted: boolean = false;
   isEditable: boolean = false;
-
+  createNoteDetailForm: FormGroup = new FormGroup({
+    detailTitle: new FormControl(null),
+    detailContent: new FormControl(null),
+    detailTodo: new FormControl(null),
+    detailCheckBox: new FormControl(false),
+  });
   constructor(
     private route: ActivatedRoute,
     private notesService: NotesService
@@ -28,26 +31,30 @@ export class NoteDetailsComponent implements OnInit {
     for (let i = 0; i < this.notesList.length; i++) {
       if (routerUniqueId === this.notesList[i]._id) {
         this.currentNoteDetail = this.notesList[i];
-        console.log(this.currentNoteDetail);
+        this.createNoteDetailForm.patchValue({
+          detailTitle: this.currentNoteDetail.title,
+          detailContent: this.currentNoteDetail.content,
+        });
       }
     }
   }
 
   onAddTodo() {
-    if (!this.taskName) return;
+    if (!this.createNoteDetailForm.value.detailTodo) return;
     if (!this.currentNoteDetail.todoList) this.currentNoteDetail.todoList = [];
     this.currentNoteDetail.todoList.push({
-      name: this.taskName,
-      completed: this.taskCompleted,
+      name: this.createNoteDetailForm.value.detailTodo,
+      completed: this.createNoteDetailForm.value.detailCheckBox,
     });
+    console.log(this.createNoteDetailForm);
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
   onEdit() {
     this.isEditable = true;
   }
-  onSubmit(titleName: string, contentName: string) {
+  onSubmit() {
     // this.isEditable = this.notesService.fetchNotes();
-    console.log(titleName, contentName);
+    console.log('submit');
     // console.log(this.notesList);
     // localStorage.setItem('editList', JSON.stringify(this.notesList));
   }

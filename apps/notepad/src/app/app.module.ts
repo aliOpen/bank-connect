@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { NoteDetailsComponent } from './component/note-details/note-details.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NotesListComponent } from './component/notes-list/notes-list.component';
 import { NoteCreateComponent } from './component/note-create/note-create.component';
 import { ErrorComponent } from './component/error/error.component';
@@ -23,7 +23,8 @@ import { ErrorComponent } from './component/error/error.component';
     BrowserAnimationsModule,
     MatIconModule,
     AppRoutingModule,
-    FormsModule,
+
+    ReactiveFormsModule,
   ],
   bootstrap: [AppComponent],
 })

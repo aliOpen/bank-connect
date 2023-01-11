@@ -20,7 +20,4 @@ export class NotesListComponent implements OnInit {
     this.notesList.splice(noteIndex, 1);
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
-  onCardClick() {
-    console.log('card clicked');
-  }
 }
