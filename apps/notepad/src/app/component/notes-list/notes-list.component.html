@@ -1,6 +1,20 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+  <input
+    class=""
+    type="text"
+    placeholder="Search"
+    formControlName="searchList"
+  />
+  <button class="btn-blue" type="submit">Submit</button>
+</form>
+
+<!-- <div *ngFor="let searchArrays of searchArray">
+  {{ searchArrays.title }}
+</div> -->
+
 <div class="flex flex-wrap">
   <div
-    *ngFor="let note of notesList; let i = index"
+    *ngFor="let note of searchArray; let i = index"
     class="max-w-sm rounded overflow-hidden shadow-lg"
   >
     <div class="px-6 py-4">

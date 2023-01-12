@@ -14,10 +14,9 @@ export class NoteDetailsComponent implements OnInit {
   notesList: Note[] = [];
   currentNoteDetail: any;
   todos: Task[] = [];
-  isEditable: boolean = false;
   createNoteDetailForm: FormGroup = new FormGroup({
-    detailTitle: new FormControl(null),
-    detailContent: new FormControl(null),
+    detailTitle: new FormControl({ value: null, disabled: true }),
+    detailContent: new FormControl({ value: null, disabled: true }),
     detailTodo: new FormControl(null),
     detailCheckBox: new FormControl(false),
   });
@@ -46,16 +45,20 @@ export class NoteDetailsComponent implements OnInit {
       name: this.createNoteDetailForm.value.detailTodo,
       completed: this.createNoteDetailForm.value.detailCheckBox,
     });
-    console.log(this.createNoteDetailForm);
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
   onEdit() {
-    this.isEditable = true;
+    this.createNoteDetailForm.get('detailTitle')?.enable();
+    this.createNoteDetailForm.get('detailContent')?.enable();
   }
   onSubmit() {
-    // this.isEditable = this.notesService.fetchNotes();
-    console.log('submit');
-    // console.log(this.notesList);
-    // localStorage.setItem('editList', JSON.stringify(this.notesList));
+    this.currentNoteDetail.title =
+      this.createNoteDetailForm.get('detailTitle')?.value;
+
+    this.currentNoteDetail.content =
+      this.createNoteDetailForm.get('detailContent')?.value;
+
+    this.currentNoteDetail.updatedAt = new Date();
+    localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
 }
