@@ -11,37 +11,18 @@ import { Note } from './note.model';
 })
 export class NotesListComponent implements OnInit {
   notesList: Note[] = [];
-  searchArray: Note[] = [];
-  searchForm: FormGroup = new FormGroup({
-    searchList: new FormControl(null),
-  });
+  // searchForm: FormGroup = new FormGroup({
+  searchList = new FormControl(null);
+  // });
 
   constructor(private notesService: NotesService) {}
   ngOnInit() {
     this.notesList = this.notesService.fetchNotes();
-    this.searchArray = [...this.notesList];
   }
 
   onRemove(noteIndex: number) {
     // alert(noteIndex + 'Removed');
     this.notesList.splice(noteIndex, 1);
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
-  }
-  onSearchSubmit() {
-    const searchTerm = this.searchForm.value.searchList;
-    if (!searchTerm) {
-      this.searchArray = this.notesList;
-      return;
-    }
-    this.searchArray = [];
-    for (let i = 0; i < this.notesList.length; i++) {
-      // console.log(this.notesList[i]);
-      if (this.notesList[i].title == searchTerm) {
-        this.searchArray.push(this.notesList[i]);
-        console.log(this.searchArray);
-      }
-    }
-    // if (this.searchForm.value == this.notesList) {
-    // }
   }
 }

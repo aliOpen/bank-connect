@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NotesListComponent } from './component/notes-list/notes-list.component';
 import { NoteCreateComponent } from './component/note-create/note-create.component';
 import { ErrorComponent } from './component/error/error.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ErrorComponent } from './component/error/error.component';
     NoteCreateComponent,
     NoteDetailsComponent,
     ErrorComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

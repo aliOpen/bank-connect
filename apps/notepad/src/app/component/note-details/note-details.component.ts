@@ -12,7 +12,7 @@ import { Task } from './task.model';
 })
 export class NoteDetailsComponent implements OnInit {
   notesList: Note[] = [];
-  currentNoteDetail: any;
+  currentNoteDetail!: Note;
   todos: Task[] = [];
   createNoteDetailForm: FormGroup = new FormGroup({
     detailTitle: new FormControl({ value: null, disabled: true }),
