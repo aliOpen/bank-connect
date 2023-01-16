@@ -1,4 +1,18 @@
-<input type="search" placeholder="Search" [formControl]="searchList" />
+<div class="w-full flex justify-center">
+  <input
+    class="text-sm text-center text-gray-base w-1/2 mr-3 py-5 px-4 h-2 border focus:outline-none shadow-lg border-gray-200 rounded mb-2"
+    type="search"
+    placeholder="Search"
+    [formControl]="searchList"
+  />
+</div>
+<div class="justify-center pt-3">
+  <a
+    class="text-sm text-center text-gray-base mr-5 py-2 px-2 h-9 border shadow-lg border-gray-200 rounded mb-2"
+    routerLink="/create"
+    >Take a note...</a
+  >
+</div>
 
 <div class="flex flex-wrap">
   <div
@@ -16,5 +30,3 @@
     </div>
   </div>
 </div>
-
-<a class="btn blue" routerLink="/create">Add</a>

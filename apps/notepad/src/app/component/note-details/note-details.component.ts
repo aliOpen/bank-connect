@@ -15,10 +15,16 @@ export class NoteDetailsComponent implements OnInit {
   currentNoteDetail!: Note;
   todos: Task[] = [];
   createNoteDetailForm: FormGroup = new FormGroup({
-    detailTitle: new FormControl({ value: null, disabled: true }),
-    detailContent: new FormControl({ value: null, disabled: true }),
-    detailTodo: new FormControl(null),
-    detailCheckBox: new FormControl(false),
+    detailTitle: new FormControl<string | null>({
+      value: null,
+      disabled: true,
+    }),
+    detailContent: new FormControl<string | null>({
+      value: null,
+      disabled: true,
+    }),
+    detailTodo: new FormControl<string | null>(null),
+    detailCheckBox: new FormControl<boolean | null>(false),
   });
   constructor(
     private route: ActivatedRoute,

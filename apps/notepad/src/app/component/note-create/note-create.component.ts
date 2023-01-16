@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
 
@@ -14,8 +15,9 @@ export class NoteCreateComponent {
     content: new FormControl(null),
   });
   notesList: Note[] = [];
+  showFullForm: boolean = false;
 
-  constructor(private notesService: NotesService) {}
+  constructor(private notesService: NotesService, private router: Router) {}
 
   onAdd() {
     this.notesList = this.notesService.fetchNotes();
@@ -27,5 +29,10 @@ export class NoteCreateComponent {
     });
 
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
+
+    this.router.navigate(['']);
+  }
+  showForm() {
+    this.showFullForm = true;
   }
 }
