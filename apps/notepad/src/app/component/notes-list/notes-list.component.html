@@ -24,8 +24,8 @@
       <div class="font-bold text-xl mb-2">{{ note.title }}</div>
       <p class="text-gray-700 text-base">
         {{ note.content }}
-        {{ note.createdAt | date : 'mediumDate' }}
       </p>
+
       <div class="space-x-10">
         <button (click)="onRemove(i)">
           <mat-icon
@@ -42,6 +42,9 @@
             fontIcon="launch"
           ></mat-icon
         ></a>
+        <div class="pl-16 pt-8">
+          {{ note.createdAt | date : 'mediumDate' }}
+        </div>
       </div>
     </div>
   </div>
