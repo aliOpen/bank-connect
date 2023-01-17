@@ -10,11 +10,13 @@ import { Note } from '../notes-list/note.model';
   styleUrls: ['./note-create.component.scss'],
 })
 export class NoteCreateComponent {
+  baseUrl: string = '';
   @ViewChild('colorElement') colorElement!: ElementRef;
   createNoteForm: FormGroup = new FormGroup({
-    title: new FormControl(null),
-    content: new FormControl(null),
-    color: new FormControl('bg-white'),
+    title: new FormControl<string | null>(null),
+    content: new FormControl<string | null>(null),
+    color: new FormControl<string | null>('bg-white'),
+    image: new FormControl<string | null>(''),
   });
   notesList: Note[] = [];
   showFullForm: boolean = false;
@@ -30,6 +32,7 @@ export class NoteCreateComponent {
       content: this.createNoteForm.value.content,
       createdAt: new Date(),
       color: this.createNoteForm.value.color,
+      attachment: this.createNoteForm.value.image,
     });
 
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
@@ -49,5 +52,21 @@ export class NoteCreateComponent {
   }
   onColorList(color1: string) {
     this.createNoteForm.patchValue({ color: color1 });
+  }
+  //Image Adding
+  onImage(event: Event) {
+    const targetElement = <HTMLInputElement>event.target;
+    let fileSelected;
+    if (targetElement.files && targetElement.files.length > 0) {
+      fileSelected = targetElement.files[0];
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(<File>fileSelected);
+
+    reader.onload = (e) => {
+      this.baseUrl = <string>e.target?.result;
+      this.createNoteForm.patchValue({ image: this.baseUrl });
+    };
   }
 }
