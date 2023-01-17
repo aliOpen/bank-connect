@@ -11,7 +11,7 @@ export class FilterPipe implements PipeTransform {
     const searchArray: Array<Note> = [];
 
     for (let i = 0; i < notesList.length; i++) {
-      if (notesList[i].title.includes(searchTerm)) {
+      if (notesList[i]?.title?.includes(searchTerm)) {
         searchArray.push(notesList[i]);
       }
     }

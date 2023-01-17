@@ -26,6 +26,9 @@
       <p class="text-gray-700 text-base">
         {{ note.content }}
       </p>
+      <div>
+        {{ note.label }}
+      </div>
 
       <div class="space-x-10">
         <button (click)="onRemove(i)">
@@ -35,6 +38,13 @@
             fontIcon="delete"
           ></mat-icon>
         </button>
+        <a>
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="label"
+          ></mat-icon
+        ></a>
 
         <a [routerLink]="[note._id]">
           <mat-icon
@@ -43,6 +53,7 @@
             fontIcon="launch"
           ></mat-icon
         ></a>
+
         <div class="pl-16 pt-8">
           {{ note.createdAt | date : 'mediumDate' }}
         </div>

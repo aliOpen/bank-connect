@@ -9,4 +9,5 @@ export interface Note {
   createdAt: Date;
   updatedAt?: Date;
   attachment?: Blob;
+  label?: string;
 }

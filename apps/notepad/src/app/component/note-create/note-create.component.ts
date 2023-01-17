@@ -17,10 +17,12 @@ export class NoteCreateComponent {
     content: new FormControl<string | null>(null),
     color: new FormControl<string | null>('bg-white'),
     image: new FormControl<string | null>(''),
+    label: new FormControl<string | null>(''),
   });
   notesList: Note[] = [];
   showFullForm: boolean = false;
   showColorPalette: boolean = false;
+  showLabel: boolean = false;
 
   constructor(private notesService: NotesService, private router: Router) {}
 
@@ -33,6 +35,7 @@ export class NoteCreateComponent {
       createdAt: new Date(),
       color: this.createNoteForm.value.color,
       attachment: this.createNoteForm.value.image,
+      label: this.createNoteForm.value.label,
     });
 
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
@@ -52,6 +55,13 @@ export class NoteCreateComponent {
   }
   onColorList(color1: string) {
     this.createNoteForm.patchValue({ color: color1 });
+  }
+  onLabel() {
+    this.showLabel = true;
+  }
+  onAddLabel() {
+    // console.log(this.createNoteForm.get('label'));
+    this.showLabel = false;
   }
   //Image Adding
   onImage(event: Event) {
