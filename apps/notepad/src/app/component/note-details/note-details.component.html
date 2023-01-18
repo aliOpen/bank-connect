@@ -27,28 +27,41 @@
     </div>
 
     <div *ngFor="let todo of currentNoteDetail.todoList">
-      {{ todo.name }} {{ todo.completed }}
+      <input
+        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+        type="checkbox"
+        value=""
+        id="flexCheckChecked"
+        [checked]="todo.completed"
+      />
+      <input
+        class="form-check-label inline-block text-gray-800"
+        for="flexCheckChecked"
+        placeholder="To-Do"
+        disabled
+        [value]="todo.name"
+      />
+      <!-- {{ todo.name }} {{ todo.completed }} -->
     </div>
 
-    <div class="flex">
-      <div class="form-check">
-        <input
-          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-          type="checkbox"
-          id="flexCheckIndeterminate"
-          formControlName="detailCheckBox"
-        />
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="todo"
-          type="text"
-          placeholder="To-Do"
-          formControlName="detailTodo"
-        />
-        <div>
-          <button class="btn blue" (click)="onAddTodo()">Add To-Do</button>
-        </div>
-      </div>
+    <div class="form-check m-3" formGroupName="detailTodo">
+      <input
+        class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+        type="checkbox"
+        value=""
+        id="flexCheckChecked"
+        checked
+        formControlName="detailCheckBox"
+      />
+      <input
+        class="form-check-label inline-block text-gray-800"
+        for="flexCheckChecked"
+        formControlName="detailTodoName"
+        placeholder="To-Do"
+      />
+    </div>
+    <div>
+      <button class="btn blue" (click)="onAddTodo()">Add To-Do</button>
     </div>
   </div>
 </form>

@@ -20,130 +20,148 @@
       placeholder="Content."
       formControlName="content"
     />
+    {{ createNoteForm.value | json }}
+    <div formArrayName="tasks">
+      <div
+        class="form-check m-3"
+        *ngFor="let taskControl of getControls(); let i = index"
+        [formGroupName]="i"
+      >
+        <input
+          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+          type="checkbox"
+          formControlName="completed"
+        />
+        <input
+          class="form-check-label inline-block text-gray-800"
+          placeholder="To-Do"
+          formControlName="name"
+        />
+      </div>
+    </div>
+
     <div *ngIf="showFullForm">
-      <div class="relative inline-block text-center" *ngIf="showColorPalette">
+      <div
+        class="relative inline-block text-center bg-blue-500"
+        *ngIf="showColorPalette"
+      >
         <div
-          class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          class="flex absolute right-0 z-10 mt-2 origin-top-right rounded-md shadow-lg focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
           tabindex="-1"
         >
-          <div class="py-1" role="none">
-            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+          <div class="flex justify-between p-3" role="none">
             <button
-              class="text-gray-700 block px-4 py-2 text-sm"
+              class="text-gray-700 block mx-1 p-4 text-sm bg-pink-100 border border-black rounded-full"
               role="menuitem"
               tabindex="-1"
               id="menu-item-2"
               type="button"
               (click)="onColorList('bg-pink-100')"
-            >
-              pink
-            </button>
+            ></button>
             <button
-              class="text-gray-700 block px-4 py-2 text-sm"
+              class="text-gray-700 block mx-1 p-4 text-sm bg-yellow-100 border border-black rounded-full"
               role="menuitem"
               tabindex="-1"
               id="menu-item-2"
               type="button"
               (click)="onColorList('bg-yellow-100')"
-            >
-              yellow
-            </button>
+            ></button>
             <button
-              class="text-gray-700 block px-4 py-2 text-sm"
+              class="text-gray-700 block mx-1 p-4 text-sm bg-green-100 border border-black rounded-full"
               role="menuitem"
               tabindex="-1"
               id="menu-item-2"
               type="button"
               (click)="onColorList('bg-green-100')"
-            >
-              green
-            </button>
+            ></button>
             <button
-              class="text-gray-700 block px-4 py-2 text-sm"
+              class="text-gray-700 block mx-1 p-4 text-sm bg-teal-100 border border-black rounded-full"
               role="menuitem"
               tabindex="-1"
               id="menu-item-2"
               type="button"
               (click)="onColorList('bg-teal-100')"
-            >
-              teal
-            </button>
+            ></button>
             <button
-              class="text-gray-700 block px-4 py-2 text-sm"
+              class="text-gray-700 block mx-1 p-4 text-sm bg-blue-100 border border-black rounded-full"
               role="menuitem"
               tabindex="-1"
               id="menu-item-2"
               type="button"
               (click)="onColorList('bg-blue-100')"
-            >
-              blue
-            </button>
+            ></button>
             <button
-              class="text-gray-700 block px-4 py-2 text-sm"
+              class="text-gray-700 block mx-1 p-4 text-sm bg-purple-100 border border-black rounded-full"
               role="menuitem"
               tabindex="-1"
               id="menu-item-2"
               type="button"
               (click)="onColorList('bg-purple-100')"
-            >
-              purple
-            </button>
+            ></button>
           </div>
         </div>
       </div>
+      <div class="my-3">
+        <button class="mx-2" type="button" (click)="onColor()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="palette"
+          ></mat-icon>
+        </button>
 
-      <button type="button" (click)="onColor()">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="palette"
-        ></mat-icon>
-      </button>
+        <label role="button" type="button">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="image"
+          ></mat-icon>
 
-      <label role="button" type="button">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="image"
-        ></mat-icon>
+          <input
+            class="hidden mx-2"
+            type="file"
+            accept="image/*"
+            (change)="onImage($event)"
+          />
+        </label>
 
-        <input
-          class="hidden"
-          type="file"
-          accept="image/*"
-          (change)="onImage($event)"
-        />
-      </label>
+        <button class="relative mx-2" type="button" (click)="onLabel()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="label"
+          ></mat-icon>
+          <div
+            *ngIf="showLabel"
+            class="absolute left-full right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabindex="-1"
+          >
+            <input formControlName="label" type="text" />
+            <button type="button" (click)="onAddLabel()">Add</button>
+          </div>
+        </button>
+        <button class="mx-2" type="button" (click)="onAddTask()">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="check_box"
+          ></mat-icon>
+        </button>
 
-      <button class="relative" type="button" (click)="onLabel()">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="label"
-        ></mat-icon>
-        <div
-          *ngIf="showLabel"
-          class="absolute left-full right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="menu-button"
-          tabindex="-1"
-        >
-          <input formControlName="label" type="text" />
-          <button type="button" (click)="onAddLabel()">Add</button>
-        </div>
-      </button>
-
-      <button type="button">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="more_vert"
-        ></mat-icon>
-      </button>
+        <button type="button">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="more_vert"
+          ></mat-icon>
+        </button>
+      </div>
     </div>
     <button type="submit" class="btn blue mx-auto">Create</button>
   </div>

@@ -23,8 +23,10 @@ export class NoteDetailsComponent implements OnInit {
       value: null,
       disabled: true,
     }),
-    detailTodo: new FormControl<string | null>(null),
-    detailCheckBox: new FormControl<boolean | null>(false),
+    detailTodo: new FormGroup({
+      detailTodoName: new FormControl<string | null>(''),
+      detailCheckBox: new FormControl<boolean | null>(false),
+    }),
   });
   constructor(
     private route: ActivatedRoute,
@@ -48,8 +50,8 @@ export class NoteDetailsComponent implements OnInit {
     if (!this.createNoteDetailForm.value.detailTodo) return;
     if (!this.currentNoteDetail.todoList) this.currentNoteDetail.todoList = [];
     this.currentNoteDetail.todoList.push({
-      name: this.createNoteDetailForm.value.detailTodo,
-      completed: this.createNoteDetailForm.value.detailCheckBox,
+      name: this.createNoteDetailForm.value.detailTodo.detailTodoName,
+      completed: this.createNoteDetailForm.value.detailTodo.detailCheckBox,
     });
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
