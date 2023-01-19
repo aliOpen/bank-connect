@@ -18,7 +18,7 @@
 <div class="flex flex-wrap">
   <div
     *ngFor="let note of notesList | filter : searchList.value; let i = index"
-    class="max-w-sm overflow-hidden px-5 py-3 m-2"
+    class="max-w-md overflow-hidden px-5 py-3 m-2"
     (click)="onCardClick(note)"
   >
     <div

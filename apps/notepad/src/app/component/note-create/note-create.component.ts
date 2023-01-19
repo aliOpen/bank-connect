@@ -55,10 +55,6 @@ export class NoteCreateComponent {
         image: this.currSelectedNote.attachment,
         label: this.currSelectedNote.label,
       });
-
-      // (<FormArray>this.createNoteForm.get('tasks')).push(
-      //   this.currSelectedNote.todoList
-      // );
     }
   }
 

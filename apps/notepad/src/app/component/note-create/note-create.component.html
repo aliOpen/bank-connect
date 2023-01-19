@@ -13,7 +13,7 @@
     />
     <input
       *ngIf="showFullForm"
-      class="appearance-none text-gray-700 font-bold mb-3 leading-tight focus:outline-none"
+      class="appearance-none text-gray-700 font-normal mb-3 leading-tight focus:outline-none"
       type="text"
       placeholder="Title"
       formControlName="title"
@@ -47,6 +47,12 @@
     </div>
 
     <div *ngIf="showFullForm">
+      <button
+        type="submit"
+        class="bg-white hover:bg-gray-100 text-gray-700 font-normal py-1 px-3 border-gray-400 rounded shadow"
+      >
+        Create
+      </button>
       <div class="my-3">
         <button class="mx-2" type="button" (click)="onColor()">
           <mat-icon
@@ -149,9 +155,14 @@
             aria-labelledby="menu-button"
             tabindex="-1"
           >
-            <input formControlName="label" type="text" />
+            <input
+              class="w-full max-w-xs"
+              formControlName="label"
+              type="text"
+              placeholder="Enter Label"
+            />
             <button
-              class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              class="bg-white hover:bg-gray-100 text-gray-700 font-normal py-1 px-3 rounded shadow"
               type="button"
               (click)="onAddLabel()"
             >
@@ -176,6 +187,5 @@
         </button>
       </div>
     </div>
-    <button type="submit" class="btn bg-black mx-auto">Create</button>
   </div>
 </form>
