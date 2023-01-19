@@ -1,4 +1,11 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotesService } from '../../notes.service';
@@ -11,26 +18,81 @@ import { Task } from '../note-details/task.model';
   styleUrls: ['./note-create.component.scss'],
 })
 export class NoteCreateComponent {
+  @Input() currSelectedNote!: Note;
+  @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
   baseUrl: string = '';
   @ViewChild('colorElement') colorElement!: ElementRef;
   createNoteForm: FormGroup = new FormGroup({
-    title: new FormControl<string | null>(null),
-    content: new FormControl<string | null>(null),
+    title: new FormControl<string | null>({
+      value: null,
+      disabled: false,
+    }),
+    content: new FormControl<string | null>({
+      value: null,
+      disabled: false,
+    }),
     color: new FormControl<string | null>('bg-white'),
     image: new FormControl<string | null>(''),
-    label: new FormControl<string | null>(''),
+    label: new FormControl<string | null>({
+      value: null,
+      disabled: false,
+    }),
     tasks: new FormArray<FormArray>([]),
   });
   notesList: Note[] = [];
-  showFullForm: boolean = false;
+  @Input() showFullForm: boolean = false;
   showColorPalette: boolean = false;
   showLabel: boolean = false;
 
   constructor(private notesService: NotesService, private router: Router) {}
 
+  ngOnInit() {
+    if (this.currSelectedNote) {
+      this.createNoteForm.patchValue({
+        title: this.currSelectedNote.title,
+        content: this.currSelectedNote.content,
+        color: this.currSelectedNote.color,
+        image: this.currSelectedNote.attachment,
+        label: this.currSelectedNote.label,
+      });
+
+      // (<FormArray>this.createNoteForm.get('tasks')).push(
+      //   this.currSelectedNote.todoList
+      // );
+    }
+  }
+
+  onSubmit() {
+    this.notesList = this.notesService.fetchNotes();
+    if (this.currSelectedNote) {
+      this.onEdit();
+    } else {
+      this.onAdd();
+    }
+    this.noteEdited.emit(null);
+  }
+
+  onEdit() {
+    for (let i = 0; i < this.notesList.length; i++) {
+      if (this.currSelectedNote._id === this.notesList[i]._id) {
+        this.notesList[i] = {
+          ...this.notesList[i],
+          title: this.createNoteForm.value.title,
+          content: this.createNoteForm.value.content,
+          color: this.createNoteForm.value.color,
+          attachment: this.createNoteForm.value.image,
+          label: this.createNoteForm.value.label,
+          todoList: (<FormArray>this.createNoteForm.get('tasks'))?.value,
+          updatedAt: new Date(),
+        };
+      }
+    }
+
+    localStorage.setItem('storelist', JSON.stringify(this.notesList));
+  }
+
   onAdd() {
     console.log((<FormArray>this.createNoteForm.get('tasks'))?.value);
-    this.notesList = this.notesService.fetchNotes();
     this.notesList.push({
       _id: new Date().getTime().toString(),
       title: this.createNoteForm.value.title,
@@ -61,7 +123,7 @@ export class NoteCreateComponent {
     this.createNoteForm.patchValue({ color: color1 });
   }
   onLabel() {
-    this.showLabel = true;
+    this.showLabel = !this.showLabel;
   }
   onAddLabel() {
     // console.log(this.createNoteForm.get('label'));
@@ -69,8 +131,14 @@ export class NoteCreateComponent {
   }
   onAddTask(): void {
     const task: FormGroup = new FormGroup({
-      name: new FormControl<string | null>(''),
-      completed: new FormControl<boolean | null>(false),
+      name: new FormControl<string | null>({
+        value: null,
+        disabled: false,
+      }),
+      completed: new FormControl<boolean | null>({
+        value: false,
+        disabled: false,
+      }),
     });
 
     (<FormArray>this.createNoteForm.get('tasks')).push(task);

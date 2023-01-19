@@ -11,9 +11,14 @@ import { Note } from './note.model';
 })
 export class NotesListComponent implements OnInit {
   notesList: Note[] = [];
-  // searchForm: FormGroup = new FormGroup({
+  showModal: boolean = false;
+  noteEditForm: FormGroup = new FormGroup({
+    editTitle: new FormControl<string | null>(''),
+  });
+
+  currentSelectedNote!: Note;
+
   searchList = new FormControl(null);
-  // });
 
   constructor(private notesService: NotesService) {}
   ngOnInit() {
@@ -24,5 +29,15 @@ export class NotesListComponent implements OnInit {
     // alert(noteIndex + 'Removed');
     this.notesList.splice(noteIndex, 1);
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
+  }
+
+  onCardClick(note: Note) {
+    this.currentSelectedNote = note;
+    this.showModal = true;
+  }
+
+  onNoteEdited(): void {
+    this.showModal = false;
+    this.notesList = this.notesService.fetchNotes();
   }
 }

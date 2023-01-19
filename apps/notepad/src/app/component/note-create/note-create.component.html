@@ -1,26 +1,32 @@
 <form
   [formGroup]="createNoteForm"
-  (ngSubmit)="onAdd()"
-  class="shadow-md rounded px-8 pt-6 pb-8 mb-4"
+  (ngSubmit)="onSubmit()"
+  class="mt-6 flex flex-col border shadow-md rounded-lg py-3"
   [ngClass]="getColor()"
 >
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-start w-1/2 px-5">
+    <img
+      *ngIf="createNoteForm.get('image')?.value"
+      [src]="createNoteForm.get('image')?.value"
+      width="300px"
+      height="300px"
+    />
     <input
-      class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      *ngIf="showFullForm"
+      class="appearance-none text-gray-700 font-bold mb-3 leading-tight focus:outline-none"
       type="text"
       placeholder="Title"
       formControlName="title"
+    />
+
+    <input
+      class="appearance-none text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+      type="text"
+      placeholder="Take a note..."
+      formControlName="content"
       (click)="showForm()"
     />
-    <img *ngIf="baseUrl" [src]="baseUrl" width="300px" height="300px" />
-    <input
-      *ngIf="showFullForm"
-      class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-      type="text"
-      placeholder="Content."
-      formControlName="content"
-    />
-    {{ createNoteForm.value | json }}
+
     <div formArrayName="tasks">
       <div
         class="form-check m-3"
@@ -41,69 +47,6 @@
     </div>
 
     <div *ngIf="showFullForm">
-      <div
-        class="relative inline-block text-center bg-blue-500"
-        *ngIf="showColorPalette"
-      >
-        <div
-          class="flex absolute right-0 z-10 mt-2 origin-top-right rounded-md shadow-lg focus:outline-none"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="menu-button"
-          tabindex="-1"
-        >
-          <div class="flex justify-between p-3" role="none">
-            <button
-              class="text-gray-700 block mx-1 p-4 text-sm bg-pink-100 border border-black rounded-full"
-              role="menuitem"
-              tabindex="-1"
-              id="menu-item-2"
-              type="button"
-              (click)="onColorList('bg-pink-100')"
-            ></button>
-            <button
-              class="text-gray-700 block mx-1 p-4 text-sm bg-yellow-100 border border-black rounded-full"
-              role="menuitem"
-              tabindex="-1"
-              id="menu-item-2"
-              type="button"
-              (click)="onColorList('bg-yellow-100')"
-            ></button>
-            <button
-              class="text-gray-700 block mx-1 p-4 text-sm bg-green-100 border border-black rounded-full"
-              role="menuitem"
-              tabindex="-1"
-              id="menu-item-2"
-              type="button"
-              (click)="onColorList('bg-green-100')"
-            ></button>
-            <button
-              class="text-gray-700 block mx-1 p-4 text-sm bg-teal-100 border border-black rounded-full"
-              role="menuitem"
-              tabindex="-1"
-              id="menu-item-2"
-              type="button"
-              (click)="onColorList('bg-teal-100')"
-            ></button>
-            <button
-              class="text-gray-700 block mx-1 p-4 text-sm bg-blue-100 border border-black rounded-full"
-              role="menuitem"
-              tabindex="-1"
-              id="menu-item-2"
-              type="button"
-              (click)="onColorList('bg-blue-100')"
-            ></button>
-            <button
-              class="text-gray-700 block mx-1 p-4 text-sm bg-purple-100 border border-black rounded-full"
-              role="menuitem"
-              tabindex="-1"
-              id="menu-item-2"
-              type="button"
-              (click)="onColorList('bg-purple-100')"
-            ></button>
-          </div>
-        </div>
-      </div>
       <div class="my-3">
         <button class="mx-2" type="button" (click)="onColor()">
           <mat-icon
@@ -111,6 +54,69 @@
             aria-label="Example home icon"
             fontIcon="palette"
           ></mat-icon>
+          <div
+            class="relative text-center bg-blue-500"
+            *ngIf="showColorPalette"
+          >
+            <div
+              class="flex absolute top-full z-10 bg-white mt-2 rounded-md shadow-lg focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabindex="-1"
+            >
+              <div class="flex justify-between p-4" role="none">
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-pink-100 border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-pink-100')"
+                ></button>
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-yellow-100 border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-yellow-100')"
+                ></button>
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-green-100 border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-green-100')"
+                ></button>
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-teal-100 border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-teal-100')"
+                ></button>
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-blue-100 border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-blue-100')"
+                ></button>
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-purple-100 border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-purple-100')"
+                ></button>
+              </div>
+            </div>
+          </div>
         </button>
 
         <label role="button" type="button">
@@ -128,11 +134,12 @@
           />
         </label>
 
-        <button class="relative mx-2" type="button" (click)="onLabel()">
+        <button class="relative mx-2" type="button">
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
             fontIcon="label"
+            (click)="onLabel()"
           ></mat-icon>
           <div
             *ngIf="showLabel"
@@ -143,7 +150,13 @@
             tabindex="-1"
           >
             <input formControlName="label" type="text" />
-            <button type="button" (click)="onAddLabel()">Add</button>
+            <button
+              class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              type="button"
+              (click)="onAddLabel()"
+            >
+              Add
+            </button>
           </div>
         </button>
         <button class="mx-2" type="button" (click)="onAddTask()">
@@ -163,6 +176,6 @@
         </button>
       </div>
     </div>
-    <button type="submit" class="btn blue mx-auto">Create</button>
+    <button type="submit" class="btn bg-black mx-auto">Create</button>
   </div>
 </form>
