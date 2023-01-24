@@ -21,6 +21,7 @@ export class NoteCreateComponent {
   @Input() currSelectedNote!: Note;
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
   baseUrl: string = '';
+
   @ViewChild('colorElement') colorElement!: ElementRef;
   createNoteForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>({
@@ -39,10 +40,11 @@ export class NoteCreateComponent {
     }),
     tasks: new FormArray<FormArray>([]),
   });
-  notesList: Note[] = [];
+  notesList: any = [];
   @Input() showFullForm: boolean = false;
   showColorPalette: boolean = false;
   showLabel: boolean = false;
+  showAttachedLabel: boolean = false;
 
   constructor(private notesService: NotesService, private router: Router) {}
 
@@ -54,6 +56,20 @@ export class NoteCreateComponent {
         color: this.currSelectedNote.color,
         image: this.currSelectedNote.attachment,
         label: this.currSelectedNote.label,
+      });
+
+      this.currSelectedNote.todoList?.forEach((todo: Task) => {
+        const task: FormGroup = new FormGroup({
+          name: new FormControl<string | null>({
+            value: todo.name,
+            disabled: false,
+          }),
+          completed: new FormControl<boolean | null>({
+            value: todo.completed,
+            disabled: false,
+          }),
+        });
+        (<FormArray>this.createNoteForm.get('tasks')).push(task);
       });
     }
   }
@@ -88,12 +104,12 @@ export class NoteCreateComponent {
   }
 
   onAdd() {
-    console.log((<FormArray>this.createNoteForm.get('tasks'))?.value);
-    this.notesList.push({
+    this.notesList.unshift({
       _id: new Date().getTime().toString(),
       title: this.createNoteForm.value.title,
       content: this.createNoteForm.value.content,
       createdAt: new Date(),
+      updatedAt: new Date(),
       color: this.createNoteForm.value.color,
       attachment: this.createNoteForm.value.image,
       label: this.createNoteForm.value.label,
@@ -102,10 +118,11 @@ export class NoteCreateComponent {
 
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
 
-    this.router.navigate(['']);
+    this.resetForm();
+
+    // this.router.navigate(['']);
   }
   onColor() {
-    // this.createNoteForm.patchValue({ color: 'bg-blue-100' });
     this.showColorPalette = !this.showColorPalette;
   }
   showForm() {
@@ -122,8 +139,10 @@ export class NoteCreateComponent {
     this.showLabel = !this.showLabel;
   }
   onAddLabel() {
-    // console.log(this.createNoteForm.get('label'));
+    // const labelList = [];
+    // labelList.push(this.createNoteForm.get('label')?.value);
     this.showLabel = false;
+    this.showAttachedLabel = true;
   }
   onAddTask(): void {
     const task: FormGroup = new FormGroup({
@@ -138,10 +157,12 @@ export class NoteCreateComponent {
     });
 
     (<FormArray>this.createNoteForm.get('tasks')).push(task);
-    console.log((<FormArray>this.createNoteForm.get('tasks'))?.controls);
   }
   getControls() {
     return (<FormArray>this.createNoteForm.get('tasks'))?.controls;
+  }
+  resetForm() {
+    this.createNoteForm.reset();
   }
   //Image Adding
   onImage(event: Event) {
