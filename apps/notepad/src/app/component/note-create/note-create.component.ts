@@ -20,6 +20,7 @@ import { Task } from '../note-details/task.model';
 export class NoteCreateComponent {
   @Input() currSelectedNote!: Note;
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
+  // @Output() noteAdded: EventEmitter<null> = new EventEmitter<null>();
   baseUrl: string = '';
 
   @ViewChild('colorElement') colorElement!: ElementRef;
@@ -163,6 +164,7 @@ export class NoteCreateComponent {
   }
   resetForm() {
     this.createNoteForm.reset();
+    (<FormArray>this.createNoteForm.get('tasks'))?.clear();
   }
   //Image Adding
   onImage(event: Event) {

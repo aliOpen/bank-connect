@@ -5,7 +5,7 @@ export interface Note {
   title: string;
   content: string;
   color?: string;
-  todoList?: Array<Task>;
+  todoList: Array<Task>;
   createdAt: Date;
   updatedAt?: Date;
   attachment?: Blob;
