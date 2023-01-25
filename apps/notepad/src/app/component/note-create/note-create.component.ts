@@ -120,8 +120,6 @@ export class NoteCreateComponent {
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
 
     this.resetForm();
-
-    // this.router.navigate(['']);
   }
   onColor() {
     this.showColorPalette = !this.showColorPalette;
@@ -140,8 +138,6 @@ export class NoteCreateComponent {
     this.showLabel = !this.showLabel;
   }
   onAddLabel() {
-    // const labelList = [];
-    // labelList.push(this.createNoteForm.get('label')?.value);
     this.showLabel = false;
     this.showAttachedLabel = true;
   }

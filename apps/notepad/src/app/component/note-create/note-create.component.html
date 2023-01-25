@@ -56,7 +56,6 @@
       {{ createNoteForm.get('label')?.value }}
     </div>
     <div *ngIf="showFullForm">
-      <!-- <div class="flex justify-center"></div> -->
       <div *ngIf="currSelectedNote" class="flex justify-end w-full">
         <div class="tooltip">
           Edited :
@@ -197,14 +196,6 @@
           ></mat-icon>
           <span class="tooltiptext">Todo</span>
         </button>
-
-        <!-- <button type="button">
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="more_vert"
-          ></mat-icon>
-        </button> -->
         <button type="submit" class="mx-2 tooltip">
           <mat-icon
             aria-hidden="false"
@@ -214,7 +205,6 @@
           <span class="tooltiptext">
             {{ currSelectedNote ? 'save' : 'Add' }}
           </span>
-          <!-- {{ currSelectedNote ? 'Edit' : '+' }} -->
         </button>
       </div>
     </div>

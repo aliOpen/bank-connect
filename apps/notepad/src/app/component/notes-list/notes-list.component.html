@@ -46,16 +46,16 @@
   ></np-note-create>
 </div>
 
-<div class="flex flex-wrap pl-1">
+<div class="grid grid-cols-4 pl-1">
   <div
     *ngFor="let note of notesList | filter : searchList.value; let i = index"
-    class="max-w-lg px-6 py-3 m-2"
+    class="max-w-lg px-4 py-3 m-1 inline"
     (click)="onCardClick(note)"
     (mouseenter)="onMouseEnter()"
     (mouseleave)="onMouseLeave()"
   >
     <div
-      class="border px-8 py-6 hover:shadow-slate-900 shadow-lg rounded"
+      class="border px-8 py-6 hover:shadow-slate-900 shadow-md rounded"
       [ngClass]="note.color"
     >
       <div class="flex p-2 font-bold text-xl justify-between">
@@ -74,7 +74,9 @@
       </div>
 
       <img [src]="note.attachment" />
-      <div class="p-2 text-lg">{{ note.content }}</div>
+      <div class="p-2 text-base max-h-72 overflow-auto">
+        {{ note.content }}
+      </div>
 
       <div
         *ngIf="note.label"
@@ -84,10 +86,7 @@
       </div>
 
       <div class="max-h-32 overflow-auto">
-        <div
-          *ngFor="let todo of note.todoList; let j = index"
-          class="py-2 hover:border hover:border-b-slate-500"
-        >
+        <div *ngFor="let todo of note.todoList; let j = index" class="py-2">
           <input
             class="form-check-input h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
             type="checkbox"

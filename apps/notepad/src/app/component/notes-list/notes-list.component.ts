@@ -32,9 +32,6 @@ export class NotesListComponent implements OnInit {
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
     this.showColdScreenFun();
   }
-  // checkValue(e: Event) {
-  //   e.stopPropagation();
-  // }
 
   onCardClick(note: Note) {
     this.currentSelectedNote = note;
