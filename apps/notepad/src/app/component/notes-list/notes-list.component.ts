@@ -56,12 +56,6 @@ export class NotesListComponent implements OnInit {
     this.notesList = this.notesService.fetchNotes();
     this.showColdScreenFun();
   }
-  onMouseEnter() {
-    this.showDelete = true;
-  }
-  onMouseLeave() {
-    this.showDelete = false;
-  }
 
   onChecked(e: Event, i: number, j: number) {
     e.stopPropagation();
