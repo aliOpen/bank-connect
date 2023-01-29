@@ -13,14 +13,13 @@ import { Note } from '../notes-list/note.model';
 import { Task } from '../note-details/task.model';
 
 @Component({
-  selector: 'np-note-create',
-  templateUrl: './note-create.component.html',
-  styleUrls: ['./note-create.component.scss'],
+  selector: 'np-note',
+  templateUrl: './note.component.html',
+  styleUrls: ['./note.component.scss'],
 })
-export class NoteCreateComponent {
+export class NoteComponent {
   @Input() currSelectedNote!: Note;
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
-  // @Output() noteAdded: EventEmitter<null> = new EventEmitter<null>();
   baseUrl: string = '';
 
   @ViewChild('colorElement') colorElement!: ElementRef;
@@ -158,6 +157,7 @@ export class NoteCreateComponent {
   getControls() {
     return (<FormArray>this.createNoteForm.get('tasks'))?.controls;
   }
+  //clear the form once the note is added
   resetForm() {
     this.createNoteForm.reset();
     (<FormArray>this.createNoteForm.get('tasks'))?.clear();

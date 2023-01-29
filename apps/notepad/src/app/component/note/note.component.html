@@ -59,11 +59,11 @@
       <div *ngIf="currSelectedNote" class="flex justify-end w-full">
         <div class="tooltip">
           Edited :
-          {{ currSelectedNote?.updatedAt | date : 'shortTime' }}
+          {{ currSelectedNote.updatedAt | date : 'shortTime' }}
 
           <span class="flex justify-end tooltiptext whitespace-nowrap">
             created :
-            {{ currSelectedNote?.createdAt | date : 'shortTime' }}</span
+            {{ currSelectedNote.createdAt | date : 'shortTime' }}</span
           >
         </div>
       </div>

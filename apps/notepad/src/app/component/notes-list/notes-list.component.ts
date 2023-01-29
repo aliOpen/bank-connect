@@ -1,9 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { fstat } from 'fs';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { NotesService } from '../../notes.service';
+import { DialogOverviewExample } from '../dialog-overview/dialog-overview.component';
 import { Note } from './note.model';
 
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 @Component({
   selector: 'np-notepad-input',
   templateUrl: './notes-list.component.html',
@@ -21,7 +30,10 @@ export class NotesListComponent implements OnInit {
 
   searchList = new FormControl(null);
 
-  constructor(private notesService: NotesService) {}
+  animal!: string;
+  name!: string;
+
+  constructor(private notesService: NotesService, public dialog: MatDialog) {}
   ngOnInit() {
     this.notesList = this.notesService.fetchNotes();
     this.showColdScreenFun();
@@ -50,6 +62,7 @@ export class NotesListComponent implements OnInit {
   onMouseLeave() {
     this.showDelete = false;
   }
+
   onChecked(e: Event, i: number, j: number) {
     e.stopPropagation();
     this.notesList[i].todoList[j].completed = (<HTMLInputElement>(
@@ -64,5 +77,17 @@ export class NotesListComponent implements OnInit {
     } else {
       this.showColdScreen = true;
     }
+  }
+
+  openDialog(note: Note): void {
+    this.currentSelectedNote = note;
+    const dialogRef = this.dialog.open(DialogOverviewExample, {
+      data: this.currentSelectedNote,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
   }
 }
