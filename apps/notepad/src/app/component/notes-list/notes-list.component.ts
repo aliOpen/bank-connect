@@ -16,7 +16,6 @@ export interface DialogData {
 })
 export class NotesListComponent implements OnInit {
   notesList: Note[] = [];
-  showModal: boolean = false;
   showColdScreen: boolean = true;
   noteEditForm: FormGroup = new FormGroup({
     editTitle: new FormControl<string | null>(''),
@@ -40,14 +39,11 @@ export class NotesListComponent implements OnInit {
 
   onCardClick(note: Note) {
     this.currentSelectedNote = note;
-    this.showModal = true;
     this.currentSelectedNote.createdAt;
   }
 
   onNoteEdited(): void {
-    this.showModal = false;
     this.notesList = this.notesService.fetchNotes();
-    this.showColdScreenFun();
   }
 
   onChecked(e: Event, i: number, j: number) {

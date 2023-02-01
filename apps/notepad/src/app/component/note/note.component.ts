@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
 import { Task } from '../notes-list/task.model';
@@ -18,13 +17,18 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './note.component.html',
 })
 export class NoteComponent {
-  @ViewChild('colorChooseButton') colorChooseButton!: ElementRef;
+  notesList: any = [];
+  @Input() showFullForm: boolean = false;
+  showColorPalette: boolean = false;
+  showLabel: boolean = false;
+  showAttachedLabel: boolean = false;
+  baseUrl: string = '';
+
   @ViewChild('contentInputField') contentInputField!: any;
   @Input() currSelectedNote!: Note;
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
-  baseUrl: string = '';
-
   @ViewChild('colorElement') colorElement!: ElementRef;
+
   createNoteForm: FormGroup = new FormGroup({
     title: new FormControl<string | null>({
       value: null,
@@ -40,20 +44,10 @@ export class NoteComponent {
       value: null,
       disabled: false,
     }),
-    labels: new FormArray<FormArray>([]),
     tasks: new FormArray<FormArray>([]),
   });
-  notesList: any = [];
-  @Input() showFullForm: boolean = false;
-  showColorPalette: boolean = false;
-  showLabel: boolean = false;
-  showAttachedLabel: boolean = false;
 
-  constructor(
-    private notesService: NotesService,
-    private router: Router,
-    public dialog: MatDialog
-  ) {}
+  constructor(private notesService: NotesService, public dialog: MatDialog) {}
 
   ngOnInit() {
     if (this.currSelectedNote) {
