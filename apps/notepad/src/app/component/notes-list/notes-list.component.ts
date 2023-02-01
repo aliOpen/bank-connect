@@ -1,10 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { NotesService } from '../../notes.service';
 import { DialogOverviewExample } from '../dialog-overview/dialog-overview.component';
 import { Note } from './note.model';
@@ -29,9 +25,6 @@ export class NotesListComponent implements OnInit {
   currentSelectedNote!: Note;
 
   searchList = new FormControl(null);
-
-  animal!: string;
-  name!: string;
 
   constructor(private notesService: NotesService, public dialog: MatDialog) {}
   ngOnInit() {
@@ -77,11 +70,17 @@ export class NotesListComponent implements OnInit {
     this.currentSelectedNote = note;
     const dialogRef = this.dialog.open(DialogOverviewExample, {
       data: this.currentSelectedNote,
+      width: '25%',
+      height: 'h-screen',
+    });
+
+    const sub = dialogRef.componentInstance.noteEdited.subscribe((res: any) => {
+      this.notesList = this.notesService.fetchNotes();
+      dialogRef.close();
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      sub.unsubscribe();
     });
   }
 }

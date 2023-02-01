@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
@@ -14,26 +14,13 @@ import { DialogData } from '../notes-list/notes-list.component';
   templateUrl: 'dialog-overview.component.html',
 })
 export class DialogOverviewExample {
+  @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog
   ) {}
+
+  onNoteEdited() {
+    this.noteEdited.emit(null);
+  }
 }
-
-// @Component({
-//   selector: 'dialog-overview-example-dialog',
-//   templateUrl: 'dialog-overview-example-dialog.html',
-// })
-// export class DialogOverviewExampleDialog {
-//   openDialog() {
-//     throw new Error('Method not implemented.');
-//   }
-//   constructor(
-//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-//     @Inject(MAT_DIALOG_DATA) public data: DialogData
-//   ) {}
-
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
-// }

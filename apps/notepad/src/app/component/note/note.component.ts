@@ -10,14 +10,16 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
-import { Task } from '../note-details/task.model';
+import { Task } from '../notes-list/task.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'np-note',
   templateUrl: './note.component.html',
-  styleUrls: ['./note.component.scss'],
 })
 export class NoteComponent {
+  @ViewChild('colorChooseButton') colorChooseButton!: ElementRef;
+  @ViewChild('contentInputField') contentInputField!: any;
   @Input() currSelectedNote!: Note;
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
   baseUrl: string = '';
@@ -38,6 +40,7 @@ export class NoteComponent {
       value: null,
       disabled: false,
     }),
+    labels: new FormArray<FormArray>([]),
     tasks: new FormArray<FormArray>([]),
   });
   notesList: any = [];
@@ -46,7 +49,11 @@ export class NoteComponent {
   showLabel: boolean = false;
   showAttachedLabel: boolean = false;
 
-  constructor(private notesService: NotesService, private router: Router) {}
+  constructor(
+    private notesService: NotesService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     if (this.currSelectedNote) {
@@ -71,6 +78,12 @@ export class NoteComponent {
         });
         (<FormArray>this.createNoteForm.get('tasks')).push(task);
       });
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.currSelectedNote) {
+      this.contentInputField?.nativeElement.focus();
     }
   }
 

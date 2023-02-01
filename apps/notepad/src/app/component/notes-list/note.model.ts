@@ -1,4 +1,4 @@
-import { Task } from '../note-details/task.model';
+import { Task } from './task.model';
 
 export interface Note {
   _id: string;

@@ -4,13 +4,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
-import { NoteDetailsComponent } from './component/note-details/note-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotesListComponent } from './component/notes-list/notes-list.component';
 import { NoteComponent } from './component/note/note.component';
 import { ErrorComponent } from './component/error/error.component';
 import { FilterPipe } from './filter.pipe';
 import { DialogOverviewExample } from './component/dialog-overview/dialog-overview.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   MatDialogModule,
   MatDialogRef,
@@ -23,7 +23,6 @@ import {
     AppComponent,
     NoteComponent,
     NotesListComponent,
-    NoteDetailsComponent,
     ErrorComponent,
     FilterPipe,
     DialogOverviewExample,
@@ -35,13 +34,13 @@ import {
     MatDialogModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
 
   exports: [
     AppComponent,
     NoteComponent,
     NotesListComponent,
-    NoteDetailsComponent,
     ErrorComponent,
     FilterPipe,
     DialogOverviewExample,

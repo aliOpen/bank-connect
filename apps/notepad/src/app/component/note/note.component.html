@@ -4,12 +4,13 @@
   class="py-1"
   [ngClass]="getColor()"
 >
-  <div class="flex flex-col justify-start px-2">
+  <div class="flex flex-col px-2">
     <img
       *ngIf="createNoteForm.get('image')?.value"
       [src]="createNoteForm.get('image')?.value"
       width="200px"
       height="200px"
+      class="self-center"
     />
     <input
       *ngIf="showFullForm"
@@ -21,6 +22,7 @@
     />
 
     <textarea
+      #contentInputField
       [rows]="currSelectedNote ? 5 : 2"
       class="appearance-none text-black p-2 leading-tight focus:outline-none focus:shadow-outline font-normal"
       [ngClass]="createNoteForm.get('color')?.value"
@@ -57,31 +59,32 @@
     </div>
     <div *ngIf="showFullForm">
       <div *ngIf="currSelectedNote" class="flex justify-end w-full">
-        <div class="tooltip">
+        <div
+          matTooltip="Created : {{
+            currSelectedNote.createdAt | date : 'shortTime'
+          }}"
+        >
           Edited :
           {{ currSelectedNote.updatedAt | date : 'shortTime' }}
-
-          <span class="flex justify-end tooltiptext whitespace-nowrap">
-            created :
-            {{ currSelectedNote.createdAt | date : 'shortTime' }}</span
-          >
         </div>
       </div>
       <div class="my-3 flex justify-around">
-        <button class="mx-2 tooltip" type="button" (click)="onColor()">
+        <button
+          #colorChooseButton
+          matTooltip="Background"
+          class="mx-2"
+          type="button"
+          (click)="onColor()"
+        >
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
             fontIcon="palette"
             class="material-icons-outlined"
           ></mat-icon>
-          <span class="tooltiptext w-fit">Background</span>
-          <div
-            class="relative text-center bg-blue-500"
-            *ngIf="showColorPalette"
-          >
+          <div *ngIf="showColorPalette" class="fixed bg-white text-center">
             <div
-              class="flex absolute top-full z-10 bg-white mt-2 rounded-md shadow-lg focus:outline-none"
+              class="flex z-10 mt-2 rounded-md shadow-lg focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
@@ -141,13 +144,12 @@
           </div>
         </button>
 
-        <label role="button" type="button" class="tooltip">
+        <label role="button" type="button" matTooltip="Attachment">
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
             fontIcon="image"
           ></mat-icon>
-          <span class="tooltiptext">Attachment</span>
 
           <input
             class="hidden mx-2"
@@ -157,17 +159,16 @@
           />
         </label>
 
-        <button class="relative mx-2 tooltip" type="button">
+        <button class="mx-2" matTooltip="Label" type="button">
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
             fontIcon="label"
             (click)="onLabel()"
           ></mat-icon>
-          <span class="tooltiptext">Label</span>
           <div
             *ngIf="showLabel"
-            class="absolute left-full right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="fixed z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
@@ -188,23 +189,28 @@
             </button>
           </div>
         </button>
-        <button class="mx-2 tooltip" type="button" (click)="onAddTask()">
+        <button
+          class="mx-2"
+          matTooltip="To-Do"
+          type="button"
+          (click)="onAddTask()"
+        >
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
             fontIcon="checklist"
           ></mat-icon>
-          <span class="tooltiptext">Todo</span>
         </button>
-        <button type="submit" class="mx-2 tooltip">
+        <button
+          type="submit"
+          class="mx-2"
+          matTooltip="{{ currSelectedNote ? 'save' : 'Add' }}"
+        >
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
-            [fontIcon]="currSelectedNote ? 'offline_pin' : 'add_circle'"
+            [fontIcon]="currSelectedNote ? 'send' : 'add_circle'"
           ></mat-icon>
-          <span class="tooltiptext">
-            {{ currSelectedNote ? 'save' : 'Add' }}
-          </span>
         </button>
       </div>
     </div>

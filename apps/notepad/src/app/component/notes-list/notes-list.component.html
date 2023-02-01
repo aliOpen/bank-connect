@@ -1,4 +1,5 @@
-<div class="grid grid-cols-4">
+<!-- Header which include Search bar input tag and logo of search and close -->
+<div class="grid grid-cols-4 sticky top-3">
   <span class="flex pl-10 items-center">
     <img
       class=""
@@ -22,7 +23,7 @@
       ></mat-icon>
     </button>
     <input
-      class="text-lg font-normal text-gray-base py-5 px-9 h-2 focus:outline-none grow border-gray-300 bg-slate-100"
+      class="text-lg font-normal text-gray-base py-5 px-10 h-2 focus:outline-none grow border-gray-300 bg-slate-100"
       type="search"
       placeholder="Search"
       [formControl]="searchList"
@@ -37,7 +38,6 @@
     </button>
   </div>
 </div>
-<hr class="bg-black w-full m-3" />
 
 <div class="flex justify-center pt-4 pb-8">
   <np-note
@@ -59,14 +59,17 @@
       <div class="flex p-2 font-bold text-xl justify-between">
         <span class="">{{ note.title }}</span>
         <span class="font-normal text-sm">
-          <button class="tooltip" (click)="onRemove(i)">
+          <button
+            matTooltip="Delete"
+            matTooltipPosition="right"
+            (click)="onRemove(i)"
+          >
             <mat-icon
               class="remove"
               aria-hidden="false"
               aria-label="Example home icon"
               fontIcon="remove_circle_outline"
             ></mat-icon>
-            <span class="tooltiptext">Delete</span>
           </button>
         </span>
       </div>
@@ -103,11 +106,6 @@
 
       <div></div>
     </div>
-  </div>
-
-  <div class="w-full flex flex-col items-center mt-20" *ngIf="showColdScreen">
-    <div class="background-image"></div>
-    <div class="text-gray-500 text-2xl mt-2">Notes you add appear here</div>
   </div>
   <div
     *ngIf="showModal"
@@ -155,6 +153,9 @@
     </div>
   </div>
 </div>
-<div>
-  <dialog-overview-example></dialog-overview-example>
+<div class="mt-36">
+  <div class="w-full flex flex-col items-center" *ngIf="showColdScreen">
+    <div class="background-image"></div>
+    <div class="text-gray-500 text-2xl mt-2">Notes you add appear here</div>
+  </div>
 </div>
