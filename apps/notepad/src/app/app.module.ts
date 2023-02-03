@@ -9,7 +9,6 @@ import { NotesListComponent } from './component/notes-list/notes-list.component'
 import { NoteComponent } from './component/note/note.component';
 import { ErrorComponent } from './component/error/error.component';
 import { FilterPipe } from './filter.pipe';
-import { DialogOverviewExample } from './component/dialog-overview/dialog-overview.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {
   MatDialogModule,
@@ -25,7 +24,6 @@ import {
     NotesListComponent,
     ErrorComponent,
     FilterPipe,
-    DialogOverviewExample,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +41,6 @@ import {
     NotesListComponent,
     ErrorComponent,
     FilterPipe,
-    DialogOverviewExample,
   ],
   bootstrap: [AppComponent],
   providers: [

@@ -107,9 +107,16 @@
     </div>
   </div>
 </div>
-<div class="mt-36">
-  <div class="w-full flex flex-col items-center" *ngIf="showColdScreen">
+<div class="mt-36" *ngIf="!notesList.length">
+  <div class="w-full flex flex-col items-center">
     <div class="background-image"></div>
     <div class="text-gray-500 text-2xl mt-2">Notes you add appear here</div>
   </div>
 </div>
+<ng-template #openDailog>
+  <np-note
+    [currSelectedNote]="this.currentSelectedNote"
+    [showFullForm]="true"
+    (noteEdited)="onNoteEdited()"
+  ></np-note>
+</ng-template>

@@ -7,11 +7,15 @@ import { Note } from './component/notes-list/note.model';
 export class NotesService {
   constructor() {}
   fetchNotes(): Note[] {
-    const initialList = localStorage.getItem('storelist');
+    const initialList: string | null = localStorage.getItem('storelist');
     if (initialList) {
       return JSON.parse(initialList);
     } else {
       return [];
     }
+  }
+
+  saveNote(data: Note[]): void {
+    localStorage.setItem('storelist', JSON.stringify(data));
   }
 }

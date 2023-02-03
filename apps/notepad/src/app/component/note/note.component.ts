@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './note.component.html',
 })
 export class NoteComponent {
-  notesList: any = [];
+  notesList: Note[] = [];
   @Input() showFullForm: boolean = false;
   showColorPalette: boolean = false;
   showLabel: boolean = false;
@@ -26,6 +26,7 @@ export class NoteComponent {
 
   @ViewChild('contentInputField') contentInputField!: any;
   @Input() currSelectedNote!: Note;
+
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
   @ViewChild('colorElement') colorElement!: ElementRef;
 
@@ -107,7 +108,7 @@ export class NoteComponent {
       }
     }
 
-    localStorage.setItem('storelist', JSON.stringify(this.notesList));
+    this.notesService.saveNote(this.notesList);
   }
 
   onAdd() {
@@ -122,8 +123,7 @@ export class NoteComponent {
       label: this.createNoteForm.value.label,
       todoList: (<FormArray>this.createNoteForm.get('tasks'))?.value,
     });
-
-    localStorage.setItem('storelist', JSON.stringify(this.notesList));
+    this.notesService.saveNote(this.notesList);
 
     this.resetForm();
   }
