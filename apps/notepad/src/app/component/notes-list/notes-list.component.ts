@@ -1,16 +1,15 @@
 import {
   Component,
   OnInit,
-  Inject,
   ViewChild,
   ElementRef,
   TemplateRef,
-  ViewContainerRef,
-  Input,
+  HostListener,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NotesService } from '../../notes.service';
+import { NoteComponent } from '../note/note.component';
 import { Note } from './note.model';
 
 @Component({
@@ -19,6 +18,19 @@ import { Note } from './note.model';
   styleUrls: ['./notes-list.component.scss'],
 })
 export class NotesListComponent implements OnInit {
+  clickLocation = '';
+  @ViewChild('noteElement', { read: ElementRef }) noteElement!: ElementRef;
+
+  @HostListener('document:click', ['$event.target'])
+  clicked(target: EventTarget) {
+    if (this.noteElement?.nativeElement?.contains(target)) {
+      // console.log('Inside');
+      this.clickLocation = 'inside';
+    } else {
+      // console.log('Outside');
+      this.clickLocation = 'outside';
+    }
+  }
   notesList: Note[] = [];
   showColdScreen: boolean = true;
   noteEditForm: FormGroup = new FormGroup({
@@ -29,7 +41,7 @@ export class NotesListComponent implements OnInit {
   dialogRef!: MatDialogRef<any>;
 
   searchList = new FormControl(null);
-  @ViewChild('openDailog', { read: TemplateRef }) openDailog!: TemplateRef<any>;
+  @ViewChild('openCard', { read: TemplateRef }) openCard!: TemplateRef<any>;
 
   constructor(private notesService: NotesService, public dialog: MatDialog) {}
   ngOnInit() {
@@ -39,11 +51,6 @@ export class NotesListComponent implements OnInit {
   onRemove(noteIndex: number) {
     this.notesList.splice(noteIndex, 1);
     localStorage.setItem('storelist', JSON.stringify(this.notesList));
-  }
-
-  onCardClick(note: Note) {
-    this.currentSelectedNote = note;
-    this.currentSelectedNote.createdAt;
   }
 
   onNoteEdited(): void {
@@ -62,22 +69,10 @@ export class NotesListComponent implements OnInit {
 
   openDialog(note: Note): void {
     this.currentSelectedNote = note;
-    this.dialogRef = this.dialog.open(this.openDailog, {
+    this.dialogRef = this.dialog.open(NoteComponent, {
       data: note,
       width: '25%',
       height: 'h-screen',
     });
-
-    this.dialogRef.afterClosed().subscribe({
-      next: (res) => {
-        if (res) {
-          note = res;
-          localStorage.setItem('storelist', JSON.stringify(this.notesList));
-        }
-      },
-    });
   }
 }
-// fetchNotes(){
-
-// }

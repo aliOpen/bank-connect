@@ -41,8 +41,10 @@
 
 <div class="flex justify-center pt-4 pb-8">
   <np-note
+    #noteElement
     class="w-1/3 mt-5 flex flex-col border-2 shadow-lg rounded-lg"
     (noteEdited)="onNoteEdited()"
+    [hostListener]="clickLocation"
   ></np-note>
 </div>
 
@@ -99,6 +101,7 @@
             class="form-check-label inline-block text-gray-800"
             placeholder="To-Do"
             [ngClass]="note.color"
+            [class.line-through]="todo.completed"
             [value]="todo.name"
             disabled
           />
@@ -113,10 +116,10 @@
     <div class="text-gray-500 text-2xl mt-2">Notes you add appear here</div>
   </div>
 </div>
-<ng-template #openDailog>
+<!-- <ng-template #openCard>
   <np-note
     [currSelectedNote]="this.currentSelectedNote"
     [showFullForm]="true"
     (noteEdited)="onNoteEdited()"
   ></np-note>
-</ng-template>
+</ng-template> -->

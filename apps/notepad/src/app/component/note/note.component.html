@@ -82,7 +82,10 @@
             fontIcon="palette"
             class="material-icons-outlined"
           ></mat-icon>
-          <div *ngIf="showColorPalette" class="fixed bg-white text-center">
+          <div
+            [class.hidden]="!showColorPalette"
+            class="fixed bg-white text-center"
+          >
             <div
               class="flex z-10 mt-2 rounded-md shadow-lg focus:outline-none"
               role="menu"
@@ -167,7 +170,7 @@
             (click)="onLabel()"
           ></mat-icon>
           <div
-            *ngIf="showLabel"
+            [class.hidden]="!showLabel"
             class="fixed z-10 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
@@ -202,14 +205,15 @@
           ></mat-icon>
         </button>
         <button
+          *ngIf="currSelectedNote"
           type="submit"
           class="mx-2"
-          matTooltip="{{ currSelectedNote ? 'save' : 'Add' }}"
+          matTooltip="save"
         >
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
-            [fontIcon]="currSelectedNote ? 'send' : 'check_circle'"
+            fontIcon="send"
           ></mat-icon>
         </button>
       </div>

@@ -2,6 +2,8 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
+  Inject,
   Input,
   Output,
   ViewChild,
@@ -10,7 +12,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { NotesService } from '../../notes.service';
 import { Note } from '../notes-list/note.model';
 import { Task } from '../notes-list/task.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'np-note',
@@ -19,13 +21,16 @@ import { MatDialog } from '@angular/material/dialog';
 export class NoteComponent {
   notesList: Note[] = [];
   @Input() showFullForm: boolean = false;
+  @Input() hostListener: string = '';
+  @Input() clickArea: string = '';
+
   showColorPalette: boolean = false;
   showLabel: boolean = false;
   showAttachedLabel: boolean = false;
   baseUrl: string = '';
 
   @ViewChild('contentInputField') contentInputField!: any;
-  @Input() currSelectedNote!: Note;
+  // @Input() currSelectedNote!: Note;
 
   @Output() noteEdited: EventEmitter<null> = new EventEmitter<null>();
   @ViewChild('colorElement') colorElement!: ElementRef;
@@ -48,9 +53,22 @@ export class NoteComponent {
     tasks: new FormArray<FormArray>([]),
   });
 
-  constructor(private notesService: NotesService, public dialog: MatDialog) {}
+  constructor(
+    private notesService: NotesService,
+    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public currSelectedNote: Note | undefined
+  ) {}
 
   ngOnInit() {
+    if (
+      this.currSelectedNote &&
+      Object.keys(this.currSelectedNote).length === 0
+    )
+      this.currSelectedNote = undefined;
+
+    if (this.currSelectedNote) {
+      this.showFullForm = true;
+    }
     if (this.currSelectedNote) {
       this.createNoteForm.patchValue({
         title: this.currSelectedNote.title,
@@ -76,6 +94,10 @@ export class NoteComponent {
     }
   }
 
+  ngOnChanges() {
+    this.onHost();
+  }
+
   ngAfterViewInit() {
     if (this.currSelectedNote) {
       this.contentInputField?.nativeElement.focus();
@@ -83,18 +105,31 @@ export class NoteComponent {
   }
 
   onSubmit() {
+    console.log('Called');
     this.notesList = this.notesService.fetchNotes();
     if (this.currSelectedNote) {
+      console.log('edit+++');
       this.onEdit();
     } else {
+      if (
+        !this.createNoteForm.value.title &&
+        !this.createNoteForm.value.content
+      ) {
+        return;
+      }
       this.onAdd();
     }
     this.noteEdited.emit(null);
   }
+  onHost() {
+    if (this.hostListener == 'outside') {
+      this.onSubmit();
+    }
+  }
 
   onEdit() {
     for (let i = 0; i < this.notesList.length; i++) {
-      if (this.currSelectedNote._id === this.notesList[i]._id) {
+      if (this.currSelectedNote?._id === this.notesList[i]._id) {
         this.notesList[i] = {
           ...this.notesList[i],
           title: this.createNoteForm.value.title,
@@ -127,6 +162,7 @@ export class NoteComponent {
 
     this.resetForm();
   }
+
   onColor() {
     this.showColorPalette = !this.showColorPalette;
   }
@@ -168,6 +204,7 @@ export class NoteComponent {
   resetForm() {
     this.createNoteForm.reset();
     (<FormArray>this.createNoteForm.get('tasks'))?.clear();
+    this.showFullForm = false;
   }
   //Image Adding
   onImage(event: Event) {
