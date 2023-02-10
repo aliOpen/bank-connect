@@ -13,7 +13,6 @@
       class="self-center"
     />
     <input
-      *ngIf="showFullForm"
       [ngClass]="createNoteForm.get('color')?.value"
       class="appearance-none text-gray-700 mb-3 p-2 leading-tight focus:outline-none font-medium"
       type="text"
@@ -29,7 +28,6 @@
       type="text"
       placeholder="Take a note..."
       formControlName="content"
-      (click)="showForm()"
     ></textarea>
 
     <div formArrayName="tasks" class="max-h-32 overflow-auto">
@@ -57,7 +55,7 @@
     >
       {{ createNoteForm.get('label')?.value }}
     </div>
-    <div *ngIf="showFullForm">
+    <div>
       <div *ngIf="currSelectedNote" class="flex justify-end w-full">
         <div
           matTooltip="Created : {{
@@ -142,6 +140,14 @@
                   type="button"
                   (click)="onColorList('bg-purple-100')"
                 ></button>
+                <button
+                  class="text-gray-700 block mx-1 p-4 text-sm bg-white border border-black rounded-full"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-2"
+                  type="button"
+                  (click)="onColorList('bg-white')"
+                ></button>
               </div>
             </div>
           </div>
@@ -205,15 +211,15 @@
           ></mat-icon>
         </button>
         <button
-          *ngIf="currSelectedNote"
           type="submit"
           class="mx-2"
-          matTooltip="save"
+          matTooltip="{{ currSelectedNote ? 'save' : 'Add' }}"
+          (click)="onSubmit()"
         >
           <mat-icon
             aria-hidden="false"
             aria-label="Example home icon"
-            fontIcon="send"
+            [fontIcon]="currSelectedNote ? 'send' : 'note_add'"
           ></mat-icon>
         </button>
       </div>

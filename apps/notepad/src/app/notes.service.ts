@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Note } from './component/notes-list/note.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesService {
+  noteUpdated: Subject<boolean> = new Subject<boolean>();
+
   constructor() {}
   fetchNotes(): Note[] {
     const initialList: string | null = localStorage.getItem('storelist');

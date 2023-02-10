@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  TemplateRef,
-  HostListener,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NotesService } from '../../notes.service';
@@ -18,31 +11,13 @@ import { Note } from './note.model';
   styleUrls: ['./notes-list.component.scss'],
 })
 export class NotesListComponent implements OnInit {
-  clickLocation = '';
-  @ViewChild('noteElement', { read: ElementRef }) noteElement!: ElementRef;
-
-  @HostListener('document:click', ['$event.target'])
-  clicked(target: EventTarget) {
-    if (this.noteElement?.nativeElement?.contains(target)) {
-      // console.log('Inside');
-      this.clickLocation = 'inside';
-    } else {
-      // console.log('Outside');
-      this.clickLocation = 'outside';
-    }
-  }
   notesList: Note[] = [];
-  showColdScreen: boolean = true;
   noteEditForm: FormGroup = new FormGroup({
     editTitle: new FormControl<string | null>(''),
   });
-  showDelete: boolean = false;
   currentSelectedNote!: Note;
   dialogRef!: MatDialogRef<any>;
-
   searchList = new FormControl(null);
-  @ViewChild('openCard', { read: TemplateRef }) openCard!: TemplateRef<any>;
-
   constructor(private notesService: NotesService, public dialog: MatDialog) {}
   ngOnInit() {
     this.notesList = this.notesService.fetchNotes();
@@ -50,12 +25,8 @@ export class NotesListComponent implements OnInit {
 
   onRemove(noteIndex: number) {
     this.notesList.splice(noteIndex, 1);
-    localStorage.setItem('storelist', JSON.stringify(this.notesList));
-  }
-
-  onNoteEdited(): void {
-    this.notesList = this.notesService.fetchNotes();
-    this.dialogRef?.close();
+    this.notesService.saveNote(this.notesList);
+    // localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
 
   onChecked(e: Event, i: number, j: number) {
@@ -64,15 +35,29 @@ export class NotesListComponent implements OnInit {
       e.target
     )).checked;
 
-    localStorage.setItem('storelist', JSON.stringify(this.notesList));
+    this.notesService.saveNote(this.notesList);
+    // localStorage.setItem('storelist', JSON.stringify(this.notesList));
   }
 
-  openDialog(note: Note): void {
-    this.currentSelectedNote = note;
-    this.dialogRef = this.dialog.open(NoteComponent, {
-      data: note,
-      width: '25%',
-      height: 'h-screen',
-    });
+  openDialog(note: Note | undefined = undefined): void {
+    if (note) {
+      this.currentSelectedNote = note;
+    }
+
+    this.dialog
+      .open(NoteComponent, {
+        data: note,
+        width: '25%',
+        height: 'h-screen',
+      })
+      .afterClosed()
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.notesList = res;
+            this.notesService.saveNote(this.notesList);
+          }
+        },
+      });
   }
 }
