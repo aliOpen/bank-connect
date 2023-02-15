@@ -1,32 +1,25 @@
 {
-  "name": "notepad",
+  "name": "bank-connect-clone",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/notepad/src",
-  "prefix": "np",
+  "sourceRoot": "apps/bank-connect-clone/src",
+  "prefix": "ali-assignments",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/notepad",
-        "index": "apps/notepad/src/index.html",
-        "main": "apps/notepad/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
-        "tsConfig": "apps/notepad/tsconfig.app.json",
+        "outputPath": "dist/apps/bank-connect-clone",
+        "index": "apps/bank-connect-clone/src/index.html",
+        "main": "apps/bank-connect-clone/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/bank-connect-clone/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/notepad/src/favicon.ico",
-          "apps/notepad/src/assets"
+          "apps/bank-connect-clone/src/favicon.ico",
+          "apps/bank-connect-clone/src/assets"
         ],
-        "styles": [
-          "@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/notepad/src/styles.scss"
-        ],
+        "styles": ["apps/bank-connect-clone/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -60,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "notepad:build:production"
+          "browserTarget": "bank-connect-clone:build:production"
         },
         "development": {
-          "browserTarget": "notepad:build:development"
+          "browserTarget": "bank-connect-clone:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -71,28 +64,24 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "notepad:build"
+        "browserTarget": "bank-connect-clone:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "apps/notepad/**/*.ts",
-          "apps/notepad/**/*.html"
+          "apps/bank-connect-clone/**/*.ts",
+          "apps/bank-connect-clone/**/*.html"
         ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/notepad/jest.config.ts",
+        "jestConfig": "apps/bank-connect-clone/jest.config.ts",
         "passWithNoTests": true
       }
     }

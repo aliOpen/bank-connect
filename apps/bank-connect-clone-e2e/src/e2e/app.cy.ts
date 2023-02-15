@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('notepad', () => {
+describe('bank-connect-clone', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('notepad', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome notepad');
+    getGreeting().contains('Welcome bank-connect-clone');
   });
 });
