@@ -75,7 +75,7 @@
       <mat-menu #menu="matMenu">
         <div>
           <button mat-menu-item>Request For Demo</button>
-          <button mat-menu-item (click)="onclickTeam()">Team</button>
+          <button mat-menu-item>Team</button>
           <button mat-menu-item>Subscriptions</button>
           <button mat-menu-item>Referrals</button>
           <button mat-menu-item>Settings</button>
@@ -104,7 +104,7 @@
     mode="side"
     opened="true"
     [fixedInViewport]="true"
-    [fixedTopGap]="70"
+    [fixedTopGap]="50"
   >
     <ul>
       <div class="flex flex-col">
@@ -126,7 +126,7 @@
                 class="ml-10 mr-5"
                 src="https://app.bankonnect.co/assets/mat-icons/Payments.svg"
                 alt="*
-            " /></span
+          " /></span
             >Payments
           </button>
         </li>
@@ -194,129 +194,5 @@
       </div>
     </ul>
   </mat-sidenav>
-
-  <mat-sidenav-content>
-    <div class="py-8 px-2 mt-16">
-      <img
-        class="rounded-lg"
-        src="https://open-frontend-bucket.s3.amazonaws.com/bankonnect/dashboard-banner/icici_banner.png"
-        alt="icici banner"
-      />
-    </div>
-    <div class="font-mono text-2xl">
-      <pre>
-            Hey username, 
-        Ready to level up your business banking game?
-      </pre>
-    </div>
-    <div class="flex justify-center">
-      <div class="flex acc-details bg-gray-200 rounded-xl">
-        <div class="acc-detail py-10">
-          <div>
-            <p class="text-lg">Get your ICICI Bank Current Account</p>
-          </div>
-          <div>
-            <p>Apply for an all-powerful new current account in just 2 mins</p>
-          </div>
-          <div>
-            <button class="bg-orange-400 rounded-full p-2">LET'S GO</button>
-          </div>
-        </div>
-        <div>
-          <img
-            src="https://app.bankonnect.co/assets/images/dashboard/upgrade.png"
-            alt="background image"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="cards flex justify-center py-20 space-x-8">
-      <div class="w-60">
-        <mat-card class="card-wrapper hover:shadow-xl relative">
-          <div class="flex justify-center">
-            <img
-              class="pt-8"
-              src="https://app.bankonnect.co/assets/images/dashboard/payout.svg"
-              alt=""
-            />
-          </div>
-          <mat-card-title class="pt-10">Bulk Payouts</mat-card-title>
-          <mat-card-content class="h-32 mt-3">
-            Work Smart. Do vendor or salary payouts in minutes.
-            <div class="absolute bottom-0 right-0">
-              <img
-                src="https://app.bankonnect.co/assets/images/dashboard/corner-arrow.svg"
-                alt="Hover Image"
-                class="hover-img"
-              />
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="w-60">
-        <mat-card class="card-wrapper hover:shadow-xl relative">
-          <div class="flex justify-center">
-            <img
-              class="pt-8"
-              src="https://app.bankonnect.co/assets/images/dashboard/expense.svg"
-              alt="Expense Management"
-            />
-          </div>
-          <mat-card-title class="pt-10"> Expense Management </mat-card-title>
-          <mat-card-content class="h-32 mt-3">
-            Managing team's spend just got smarters
-            <div class="absolute bottom-0 right-0">
-              <img
-                src="https://app.bankonnect.co/assets/images/dashboard/corner-arrow.svg"
-                alt="Hover Image"
-                class="hover-img"
-              />
-            </div>
-            <div class="absolute bottom-0 right-0">
-              <img
-                src="https://app.bankonnect.co/assets/images/dashboard/corner-arrow.svg"
-                alt="Hover Image"
-                class="hover-img"
-              />
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
-      <div class="w-60">
-        <mat-card class="hover:shadow-xl relative card-wrapper">
-          <div class="flex justify-center">
-            <img
-              class="pt-8"
-              src="https://app.bankonnect.co/assets/images/dashboard/card.svg"
-              alt="Founder One Card"
-            />
-          </div>
-          <mat-card-title class="pt-10"> Founder One Card </mat-card-title>
-
-          <mat-card-content class="h-32 mt-3">
-            Get your hands on the only credit card that gets your business
-            <div class="absolute bottom-0 right-0">
-              <img
-                src="https://app.bankonnect.co/assets/images/dashboard/corner-arrow.svg"
-                alt="Hover Image"
-                class="hover-img"
-              />
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-
-    <div class="flex justify-start"></div>
-  </mat-sidenav-content>
+  <mat-sidenav-content> </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <mat-sidenav-container>
-  <mat-sidenav #sidenav> side bar content </mat-sidenav>
-  <mat-sidenav-content>
-    <button mat-button (click)="sidenav.toggle()">Toggle sidenav</button>
-    ali
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
