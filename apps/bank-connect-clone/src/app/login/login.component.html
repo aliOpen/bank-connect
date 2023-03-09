@@ -1,57 +1,114 @@
 <form
-  class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+  class="shadow-md h-screen body-color"
   x
   [formGroup]="loginPageForm"
   (ngSubmit)="onSubmit()"
 >
-  <div>
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        Username
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        id="username"
-        type="text"
-        placeholder="Username"
-        formControlName="username"
-      />
-      <div class="mb-6">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="password"
-        >
-          Password
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          id="password"
-          type="password"
-          placeholder="******************"
-          formControlName="password"
-        />
-        <p>
-          <button
-            class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded"
-            type="submit"
-          >
-            LOGIN
-          </button>
-        </p>
-        <div>
-          <p>
-            Protected by reCAPTCHA. Google
-            <a
-              href="https://policies.google.com/privacy"
-              class="text-orange-300"
-              >Privacy Policy
-            </a>
-            &<a href="https://policies.google.com/terms" class="text-orange-300"
-              >Terms of Service apply.
-            </a>
-          </p>
+  <div class="">
+    <div class="">
+      <mat-toolbar class="header-color">
+        <div class="icici-logo w-40 ml-12 pt-1">
+          <img
+            src="https://open-frontend-bucket.s3.amazonaws.com/open-money/logo/open_bankonnect_logo_2.0.png"
+            alt="powered by icici logo"
+          />
         </div>
-        <div>New User? <button class="text-orange-300">Sign Up</button></div>
+      </mat-toolbar>
+    </div>
+    <!-- background animation imge -->
+    <div class="">
+      <div class="flex justify-center items-center">
+        <div class="relative w-full h-full">
+          <img
+            class="bg-img-animation-1 absolute top-1/2 left-1/2 -translate-x-1/2"
+            src="https://app.bankonnect.co/assets/images/oval/back.svg"
+            alt="bg-1"
+          />
+          <img
+            class="bg-img-animation-2 absolute top-1/2 left-1/2 -translate-x-1/2"
+            src="https://app.bankonnect.co/assets/images/oval/middle.svg"
+            alt="bg-2"
+          />
+          <img
+            class="bg-img-animation-3 absolute top-1/2 left-1/2 -translate-x-1/2"
+            src="https://app.bankonnect.co/assets/images/oval/front.svg"
+            alt="bg-3"
+          />
+        </div>
+      </div>
+      <!-- Card Session -->
+      <div
+        class="bg-white mx-auto p-12 mt-12 z-99 relative"
+        style="width: 450px"
+      >
+        <div class="w-96 mt-30 z-99">
+          <p class="text-2xl text-left">Log in</p>
+          <p class="text-left pb-2">Get ready to ace business banking 😎</p>
+
+          <div>
+            <mat-form-field class="w-full pt-2">
+              <mat-label class="">Your Email or Mobile Number</mat-label>
+              <input
+                class="appearance-none"
+                type="email"
+                matInput
+                formControlName="username"
+              />
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <!-- <mat-error> Please enter a valid email address </mat-error>
+      <mat-error> Email is <strong>required</strong> </mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="w-full pt-10">
+              <mat-label class="">Enter Password</mat-label>
+              <input type="password" matInput formControlName="password" />
+              <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+              <!-- <mat-error> Please enter a valid email address </mat-error>
+      <mat-error> Email is <strong>required</strong> </mat-error> -->
+            </mat-form-field>
+          </div>
+          <div class="text-right pb-5">
+            <a class="text-orange-400" href="https://www.w3schools.com"
+              >Forgot Password</a
+            >
+          </div>
+
+          <p class="">
+            <button
+              class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full w-36 h-14"
+              type="submit"
+            >
+              LOGIN
+            </button>
+          </p>
+          <div>
+            <p class="pt-2">
+              Protected by reCAPTCHA. Google
+              <a
+                href="https://policies.google.com/privacy"
+                class="text-orange-300"
+                >Privacy Policy
+              </a>
+              &<a
+                href="https://policies.google.com/terms"
+                class="text-orange-300"
+                >Terms of Service apply.
+              </a>
+            </p>
+          </div>
+          <div class="pb-5">
+            New User? <a class="text-orange-300">Sign Up</a>
+          </div>
+          <div class="h-10 border border-gray-300 flex">
+            <a href="https://imgbb.com/ "
+              ><img
+                class="w-8 mt-1 ml-2 h-auto"
+                src="https://i.ibb.co/2vVpXCc/google-logo-png-google-logos-vector-eps-cdr-svg-download-10.png"
+                alt="google-logo"
+            /></a>
+            <span class="ml-24 mt-2">Sign in with Google</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

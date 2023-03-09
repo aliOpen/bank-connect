@@ -4,7 +4,8 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  background-color: rgb(224, 229, 234) !important;
+  background-color: rgb(242, 243, 247) !important;
+
   width: 18%;
   z-index: 100;
 }
@@ -23,11 +24,14 @@ li {
   padding: 5px;
 }
 .icici-logo {
-  width: 200px;
+  width: 165px;
+  // max-height: 150px;
+  padding-top: 10px;
 }
 .icici-logo-color {
-  background-color: rgb(224, 229, 234) !important;
+  background-color: rgb(242, 243, 247) !important;
   width: 260px;
+  // background-color: red;
 }
 .acc-details {
   width: 700px;
@@ -43,3 +47,12 @@ li {
 .card-wrapper:hover .hover-img {
   display: block !important;
 }
+
+.text-color-sidenav {
+  color: #5b6285;
+}
+.text-color-header {
+  background-color: rgb(176, 42, 49);
+}
+
+//use tailwind
