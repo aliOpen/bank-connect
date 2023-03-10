@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ali-assignments-login',
