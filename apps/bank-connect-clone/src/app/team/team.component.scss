@@ -1,0 +1,61 @@
+// mat-sidenav-container {
+//   width: 100% !important;
+//   height: 100vh !important;
+// }
+
+// mat-sidenav {
+//   background-color: rgb(224, 229, 234) !important;
+//   width: 18%;
+//   z-index: 100;
+// }
+
+// mat-toolbar {
+//   height: 50px;
+//   position: relative;
+//   z-index: 100;
+// }
+mat-sidenav-container {
+  width: 100% !important;
+  height: 100vh !important;
+}
+
+mat-sidenav {
+  background-color: rgb(224, 229, 234) !important;
+  width: 18%;
+  z-index: 100;
+}
+.sticky-header {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+}
+
+mat-toolbar {
+  height: 70px;
+  position: relative;
+}
+
+li {
+  padding: 5px;
+}
+.icici-logo {
+  width: 200px;
+}
+.icici-logo-color {
+  background-color: rgb(224, 229, 234) !important;
+  width: 259px;
+}
+.acc-details {
+  width: 700px;
+}
+.image-container {
+  position: relative;
+}
+
+.hover-img {
+  display: none;
+}
+
+.card-wrapper:hover .hover-img {
+  display: block !important;
+}
