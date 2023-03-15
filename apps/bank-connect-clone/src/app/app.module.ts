@@ -14,9 +14,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import appRoutes from './routerConfig';
 import { TeamComponent } from './team/team.component';
+import { FormsModule } from '@angular/forms';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,9 @@ import { TeamComponent } from './team/team.component';
     MatMenuModule,
     MatCardModule,
     MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

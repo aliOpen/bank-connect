@@ -1,7 +1,13 @@
-<mat-toolbar class="flex justify-between sticky-header !pl-0">
-  <div class="icici-logo-color h-full flex justify-center">
-    <div class="icici-logo sticky-header">
+<mat-toolbar
+  class="flex justify-between !pl-0 !fixed z-10 h-20 bg-white border border-gray-100"
+>
+  <div
+    class="icici-logo-color h-full flex justify-center z-20"
+    style="width: 311px"
+  >
+    <div class="icici-logo">
       <img
+        class="w-40 pt-2.5"
         src="https://open-frontend-bucket.s3.amazonaws.com/open-money/logo/open_bankonnect_logo_2.0.png"
         alt="powered by icici logo"
       />
@@ -14,185 +20,280 @@
     </button>
   </div> -->
 
-  <div class="flex space-x-3">
-    <div>
-      <button
-        class="bg-red-700 text-white py-2 px-2 rounded-full text-sm font-mono"
-      >
-        Request For Demo
-      </button>
-    </div>
-    <div>
-      <button
-        class="border border-orange-400 text-orange-400 py-2 px-2 inline-flex items-center rounded-full text-sm font-mono"
-      >
-        <svg
-          class="fill-current w-4 h-4 mr-2"
-          xmlns="https://app.bankonnect.co/assets/mat-icons/quick_access.svg"
-          viewBox="0 0 20 20"
+  <div class="w-full">
+    <div class="flex justify-between">
+      <div class="ml-5">
+        <p class="text-3xl font-light">Team</p>
+      </div>
+      <div class="flex justify-center space-x-8 py-1 px-3 h-8">
+        <button
+          class="flex items-center justify-center border border-orange-400 text-orange-400 rounded-full text-sm"
         >
-          <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-        </svg>
-        QUICK ACCESS
-      </button>
-    </div>
-    <div class="flex space-x-3">
-      <div>
+          <img
+            class="w-6 pr-1"
+            src="https://app.bankonnect.co/assets/mat-icons/quick_access.svg"
+            alt=""
+          />
+
+          <p class="!m-0 text-xs">QUICK ACCESS</p>
+        </button>
         <button>
           <img
             src="https://app.bankonnect.co/assets/mat-icons/phone-book.svg"
             alt="vendor & customers logo"
           />
         </button>
-      </div>
-      <div>
         <button>
           <img
             src="https://app.bankonnect.co/assets/mat-icons/notification.svg"
             alt="notification logo"
           />
         </button>
-      </div>
-    </div>
+        <div class="avatar">
+          <div class="avatar-img mr-8">
+            <a mat-button [matMenuTriggerFor]="menu">
+              <!-- <mat-icon fontIcon="account_circle"></mat-icon> -->
 
-    <div class="avatar flex relative">
-      <div class="avatar-img">
-        <button mat-button [matMenuTriggerFor]="menu">
-          <!-- <mat-icon fontIcon="account_circle"></mat-icon> -->
-
-          <img
-            class="w-10 rounded-full relative"
-            src="https://app.bankonnect.co/assets/images/avatar-male.png"
-            alt="Avatar_img"
-          />
-        </button>
-        <img
-          class="absolute bottom-0 right-1 z-10"
-          src="https://app.bankonnect.co/assets/mat-icons/ac_arrow.svg"
-          alt="arrow"
-        />
+              <img
+                class="w-10 rounded-full relative"
+                src="https://app.bankonnect.co/assets/images/avatar-male.png"
+                alt="Avatar_img"
+              />
+            </a>
+            <img
+              class="absolute right-5 top-7 z-10 w-4 mr-8"
+              src="https://app.bankonnect.co/assets/mat-icons/ac_arrow.svg"
+              alt="arrow"
+            />
+          </div>
+          <mat-menu #menu="matMenu">
+            <div>
+              <button mat-menu-item>Request For Demo</button>
+              <button mat-menu-item>Team</button>
+              <button mat-menu-item>Subscriptions</button>
+              <button mat-menu-item>Referrals</button>
+              <button mat-menu-item>Settings</button>
+              <hr />
+            </div>
+            <div>
+              <button mat-menu-item>Blog</button>
+              <button mat-menu-item>Feedback</button>
+              <button mat-menu-item>Help</button>
+              <button mat-menu-item>Terms & Conditions</button>
+              <button mat-menu-item>Privacy</button>
+              <button mat-menu-item>App Version v4.22.115</button>
+              <hr />
+            </div>
+            <div>
+              <hr />
+              <button mat-menu-item>Logout</button>
+            </div>
+          </mat-menu>
+        </div>
       </div>
-      <mat-menu #menu="matMenu">
-        <div>
-          <button mat-menu-item>Request For Demo</button>
-          <button mat-menu-item>Team</button>
-          <button mat-menu-item>Subscriptions</button>
-          <button mat-menu-item>Referrals</button>
-          <button mat-menu-item>Settings</button>
-          <hr />
-        </div>
-        <div>
-          <button mat-menu-item>Blog</button>
-          <button mat-menu-item>Feedback</button>
-          <button mat-menu-item>Help</button>
-          <button mat-menu-item>Terms & Conditions</button>
-          <button mat-menu-item>Privacy</button>
-          <button mat-menu-item>App Version v4.22.115</button>
-          <hr />
-        </div>
-        <div>
-          <hr />
-          <button mat-menu-item>Logout</button>
-        </div>
-      </mat-menu>
     </div>
   </div>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav
+    class="w-64"
     #sidenav
     mode="side"
     opened="true"
     [fixedInViewport]="true"
-    [fixedTopGap]="50"
+    [fixedTopGap]="65"
   >
-    <ul>
-      <div class="flex flex-col">
+    <ul class="h-full px-10">
+      <div class="">
         <li>
-          <button class="flex pt-10">
-            <span class="ml-5">
+          <a routerLink="/dashboard" class="flex pt-10 p-3">
+            <span class="">
               <img
-                class="ml-10 mr-5"
+                class="mr-4"
                 src="https://app.bankonnect.co/assets/mat-icons/dashboard.svg"
                 alt="*"
             /></span>
-            <p class="">Dashboard`</p>
-          </button>
+            <p class="text-base text-slate-600 hover:text-orange-400">
+              Dashboard
+            </p>
+          </a>
         </li>
         <li>
-          <button class="flex p-5">
+          <a href="" class="flex p-3">
             <span>
               <img
-                class="ml-10 mr-5"
+                class="mr-4"
                 src="https://app.bankonnect.co/assets/mat-icons/Payments.svg"
                 alt="*
-          " /></span
-            >Payments
-          </button>
+            "
+            /></span>
+            <p class="text-base text-slate-600 hover:text-orange-400">
+              Payments
+            </p>
+          </a>
         </li>
         <li>
-          <button class="flex p-5">
+          <a href="" class="flex p-3">
             <span>
               <img
-                class="ml-10 mr-5"
+                class="mr-4"
                 src="https://app.bankonnect.co/assets/mat-icons/banking.svg"
                 alt="*"
             /></span>
-            Banking
-          </button>
+            <p class="text-base text-slate-600 hover:text-orange-400">
+              Banking
+            </p>
+          </a>
         </li>
         <li>
-          <button class="flex p-5">
+          <a href="" class="flex p-3">
             <span>
               <img
-                class="ml-10 mr-5"
+                class="mr-4"
                 src="https://app.bankonnect.co/assets/mat-icons/accounting.svg"
-                alt="*" /></span
-            >Finance
-          </button>
+                alt="*"
+            /></span>
+            <p class="text-base text-slate-600 hover:text-orange-400">
+              Finance
+            </p>
+          </a>
         </li>
         <li>
-          <button class="flex p-5">
+          <a href="" class="flex p-3">
             <span>
               <img
-                class="ml-10 mr-5"
+                class="mr-4"
                 src="https://app.bankonnect.co/assets/mat-icons/Integrations.svg"
                 alt="*"
             /></span>
-            Integration
-          </button>
+            <p class="text-base text-slate-600 hover:text-orange-400">
+              Integration
+            </p>
+          </a>
         </li>
         <li>
-          <button class="flex p-5">
+          <a href="" class="flex p-3">
             <span>
               <img
-                class="ml-10 mr-5"
+                class="mr-4"
                 src="https://app.bankonnect.co/assets/mat-icons/offer.svg"
-                alt="*" /></span
-            >Offers
-          </button>
+                alt="*"
+            /></span>
+            <p class="text-base text-slate-600 hover:text-orange-400">Offers</p>
+          </a>
         </li>
-        <div>
-          <mat-card class="h-20 w-56 ml-5">
-            <!-- <mat-card-content> </mat-card-content> -->
-            <div class="pl-4 pt-5 flex">
-              <img
-                class="h-8"
-                src="https://app.bankonnect.co/assets/images/finger-finger%20copy.png"
-                alt="finger-print"
-              />
-              <div>
-                <span class="kyc-text pt-5 ml-5">
-                  KYC Status
-                  <br />
-                  <span class="text-yellow-400 ml-3"> • kyc on hold</span>
-                </span>
-              </div>
+      </div>
+      <div class="flex">
+        <mat-card class="flex justify-center h-18 w-64">
+          <!-- <mat-card-content> </mat-card-content> -->
+          <div class="pl-2 pt-3 flex">
+            <img
+              class="h-8"
+              src="https://app.bankonnect.co/assets/images/finger-finger%20copy.png"
+              alt="finger-print"
+            />
+            <div>
+              <span class="kyc-text ml-5">
+                KYC Status
+                <br />
+                <span class="text-yellow-400 ml-3"> • kyc on hold</span>
+              </span>
             </div>
-          </mat-card>
-        </div>
+          </div>
+        </mat-card>
       </div>
     </ul>
   </mat-sidenav>
-  <mat-sidenav-content> </mat-sidenav-content>
+
+  <mat-sidenav-content class="mt-20 bg-white">
+    <div class="content-container">
+      <div class="flex space-x-5 p-10 ml-10">
+        <mat-form-field appearance="fill">
+          <mat-label class="flex"> Name</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="!h-1">
+          <mat-label class="flex">Department</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="!border border-none" appearance="outline">
+          <mat-label>Roles</mat-label>
+          <mat-select>
+            <mat-option value="one"> Owner </mat-option>
+            <mat-option value="two"> Admin </mat-option>
+            <mat-option value="one"> Employee </mat-option>
+            <mat-option value="two"> Manager </mat-option
+            ><mat-option value="one">Seller</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-card
+          class="w-80 h-48 p-12 m-10 cursor-pointer hover:shadow-lg"
+          (click)="drawer.toggle()"
+        >
+          <mat-card-content>
+            <div class="flex justify-center items-center">
+              <button type="button" mat-button>
+                <img
+                  class=""
+                  src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/add.png"
+                  alt="add_logo"
+                />
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <mat-drawer-container class="example-container" autosize>
+            <div class="example-sidenav-content"></div>
+          </mat-drawer-container>
+        </mat-card>
+      </div>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- Right-Side-Drawer -->
+<div class="overlay" *ngIf="drawer.opened"></div>
+
+<mat-drawer
+  position="end"
+  mode="side"
+  #drawer
+  class="example-sidenav h-screen !z-20"
+  style="width: 500px"
+  mode="side"
+>
+  <div class="flex justify-between">
+    <p class="!my-5 !ml-5">Create Member</p>
+    <button>
+      <img
+        class="!mr-5"
+        (click)="drawer.close()"
+        src="https://open-frontend-bucket.s3.amazonaws.com/open-money/collect/close.svg"
+        alt="cross-button"
+      />
+    </button>
+  </div>
+
+  <hr class="bg-black" />
+
+  <p class="!mt-5 1 !mb-10">Please enter comma separated email ids</p>
+
+  <mat-form-field class="w-full pt-2 pl-5">
+    <mat-label class="text-base">Enter Email</mat-label>
+    <input class="appearance-none" type="email" matInput />
+  </mat-form-field>
+  <button
+    class="bg-orange-300 text-white w-full h-14"
+    style="margin-top: 510px"
+  >
+    Preview
+  </button>
+</mat-drawer>

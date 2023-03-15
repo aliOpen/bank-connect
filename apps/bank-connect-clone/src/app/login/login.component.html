@@ -63,7 +63,20 @@
 
             <mat-form-field class="w-full pt-10">
               <mat-label class="">Enter Password</mat-label>
-              <input type="password" matInput formControlName="password" />
+              <div class="flex">
+                <input
+                  type="password"
+                  matInput
+                  formControlName="pass"
+                  [type]="showPassword ? 'text' : 'password'"
+                  [ngModel]="password"
+                />
+                <button (click)="toggleShowPassword()" type="button">
+                  <mat-icon *ngIf="!showPassword"> visibility_off</mat-icon>
+                  <mat-icon *ngIf="showPassword"> visibility</mat-icon>
+                </button>
+              </div>
+
               <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
               <!-- <mat-error> Please enter a valid email address </mat-error>
       <mat-error> Email is <strong>required</strong> </mat-error> -->

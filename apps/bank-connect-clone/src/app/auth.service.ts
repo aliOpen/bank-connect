@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor(private http: HttpClient) {}
   apiCall() {
-    return this.http.post('https://v2-api.bankopen.co/users/login', {
-      login: '1212132434',
+    return this.http.post('https://uat-anandhu-api.bankopen.co/login', {
+      login: 'zemrin.pa+8968@bankopen.co',
       password: 'Test@123',
     });
   }

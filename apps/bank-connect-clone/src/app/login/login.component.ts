@@ -11,8 +11,21 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   loginPageForm: FormGroup = new FormGroup({
     username: new FormControl(),
-    password: new FormControl(),
+    pass: new FormControl(),
+
+    // password1 ='';
+    // showPassword = false;
+
+    // toggleShowPassword(){
+    //   this.showPassword = !this.showPassword
+    // }
   });
+
+  password = '';
+  showPassword = false;
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   constructor(private api: AuthService, private router: Router) {}
 

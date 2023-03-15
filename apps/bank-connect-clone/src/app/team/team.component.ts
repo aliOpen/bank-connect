@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 // import { Router } from '@angular/router';
 
 @Component({
@@ -6,4 +7,12 @@ import { Component } from '@angular/core';
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss'],
 })
-export class TeamComponent {}
+export class TeamComponent {
+  // showFiller = false;
+  @ViewChild('drawer') drawer!: MatDrawer;
+  events: string[] = [];
+  opened: boolean | undefined;
+  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(
+    window.location.host
+  );
+}

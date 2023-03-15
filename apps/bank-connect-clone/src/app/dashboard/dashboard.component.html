@@ -1,4 +1,6 @@
-<mat-toolbar class="flex justify-between !pl-0 !fixed z-10 h-20 bg-white">
+<mat-toolbar
+  class="flex justify-between !pl-0 !fixed z-10 h-20 bg-white border border-gray-100"
+>
   <div class="icici-logo-color h-full flex justify-center z-20 w-64">
     <div class="icici-logo">
       <img
@@ -49,8 +51,6 @@
       <div class="avatar">
         <div class="avatar-img">
           <a mat-button [matMenuTriggerFor]="menu">
-            <!-- <mat-icon fontIcon="account_circle"></mat-icon> -->
-
             <img
               class="w-10 rounded-full relative"
               src="https://app.bankonnect.co/assets/images/avatar-male.png"
@@ -102,7 +102,7 @@
     <ul class="h-full px-10">
       <div class="">
         <li>
-          <a href="www.google.com" class="flex pt-10 p-3">
+          <a class="flex pt-10 p-3">
             <span class="">
               <img
                 class="mr-4"
@@ -202,7 +202,7 @@
   </mat-sidenav>
 
   <!-- icici-banner-content  -->
-  <mat-sidenav-content>
+  <mat-sidenav-content class="bg-white">
     <div class="py-8 px-8 mt-16">
       <img
         class="rounded-xl"
