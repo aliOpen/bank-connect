@@ -1,18 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
-// import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'ali-assignments-team',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss'],
 })
-export class TeamComponent {
-  // showFiller = false;
-  @ViewChild('drawer') drawer!: MatDrawer;
-  events: string[] = [];
-  opened: boolean | undefined;
-  shouldRun = /(^|.)(stackblitz|webcontainer).(io|com)$/.test(
-    window.location.host
-  );
+export class TeamComponent implements OnInit {
+  teamMembers: any = [];
+
+  ngOnInit() {
+    const res = this.api.getApiCall();
+    this.teamMembers = res;
+  }
+  constructor(private api: AuthService) {}
 }
