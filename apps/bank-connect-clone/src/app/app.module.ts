@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +19,8 @@ import { TeamComponent } from './team/team.component';
 import { FormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { TokenInterceptor } from './token-interceptor.service';
+import { ViewComponent } from './view/view.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     LoginComponent,
     DashboardComponent,
     TeamComponent,
+    ViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

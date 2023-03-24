@@ -195,8 +195,8 @@
             <div>
               <span class="kyc-text ml-5">
                 KYC Status
-                <br />
-                <span class="ml-3"> • kyc on hold</span>
+
+                <span class="text-yellow-400 ml-3 block"> • kyc on hold</span>
               </span>
             </div>
           </div>
@@ -261,7 +261,7 @@
         <!-- Added Card -->
         <div
           *ngFor="let teamMember of teamMembers"
-          class="h-48 hover:shadow-lg"
+          class="h-full hover:shadow-lg bg-yellow-300"
         >
           <mat-card class="h-full">
             <mat-card-content class="">
@@ -364,11 +364,17 @@
 
   <mat-form-field class="w-full pt-2 pl-5">
     <mat-label class="text-base">Enter Email</mat-label>
-    <input class="appearance-none" type="email" matInput />
+    <input
+      class="appearance-none"
+      type="email"
+      [formControl]="email"
+      matInput
+    />
   </mat-form-field>
   <button
     class="bg-orange-300 text-white w-full h-14"
     style="margin-top: 510px"
+    (click)="onAddTeamMemberApi()"
   >
     Preview
   </button>

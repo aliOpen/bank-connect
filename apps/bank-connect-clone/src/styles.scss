@@ -5,12 +5,15 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Montserrat', sans-serif !important;
+}
 body {
   font-family: 'Montserrat', sans-serif !important;
 }
-.mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
-  font-family: 'Montserrat', sans-serif !important;
-}
+// .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+//   font-family: 'Montserrat', sans-serif !important;
+// }
 
 .mdc-text-field--focused .mdc-notched-outline__notch {
   border-right: none;

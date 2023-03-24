@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { stringify } from 'querystring';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -7,11 +9,41 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
+  email = new FormControl('');
   teamMembers: any = [];
+  addTeamMembers: any = [];
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    const res = this.api.getApiCall();
-    this.teamMembers = res;
+    this.authService.TeamApiCall().subscribe(
+      {
+        next: (res: any) => {
+          this.teamMembers = res.data;
+        },
+      },
+      {
+        error: (err: any) => {
+          console.log(err);
+        },
+      }
+    );
   }
-  constructor(private api: AuthService) {}
+
+  onAddTeamMemberApi() {
+    const emailData = this.email.value;
+    this.authService.addTeamMember(emailData).subscribe(
+      {
+        next: (res: any) => {
+          console.log(res);
+          this.addTeamMembers = res.data;
+        },
+      },
+      {
+        error: (err: any) => {
+          console.log(err);
+        },
+      }
+    );
+  }
 }

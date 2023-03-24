@@ -83,7 +83,7 @@
           </div>
           <div>
             <hr />
-            <button mat-menu-item>Logout</button>
+            <button mat-menu-item (click)="onLogout()">Logout</button>
           </div>
         </mat-menu>
       </div>
@@ -191,8 +191,8 @@
             <div>
               <span class="kyc-text ml-5">
                 KYC Status
-                <br />
-                <span class="text-yellow-400 ml-3"> • kyc on hold</span>
+
+                <span class="text-yellow-400 ml-3 block"> • kyc on hold</span>
               </span>
             </div>
           </div>

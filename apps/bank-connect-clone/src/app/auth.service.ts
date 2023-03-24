@@ -647,18 +647,44 @@ export class AuthService {
       recaptcha: token,
     });
   }
-  getApiCall() {
-    // const parameters = {
-    //   companies_id : '365418059',
-    //   orderBy:'created_at',
-    //   sortedBy:'desc',
-    //   page:'1',
-    //   open_roles_id_:''
-    // }
+  isLoggedIn() {
+    return localStorage.getItem('userName');
+  }
 
-    // return this.http.get(
-    //   'https://v2-api.bankopen.co/get_all_members?accounts_id=365418059&companies_id=365418059&orderBy=created_at&sortedBy=desc&page=1&open_roles_id=&department_id='
-    // );
-    return this.response.data;
+  TeamApiCall(): any {
+    const parameters = {
+      companies_id: '365418059',
+      orderBy: 'created_at',
+      sortedBy: 'desc',
+      page: '1',
+      open_roles_id_: '',
+    };
+    return this.http.get(
+      'https://v2-api.bankopen.co/get_all_members?accounts_id=365418059&companies_id=365418059&orderBy=created_at&sortedBy=desc&page=1&open_roles_id=&department_id='
+    );
+  }
+  addTeamMember(emailData: string | null): any {
+    console.log('==========added team member');
+    return this.http.post(
+      'https://v2-api.bankopen.co/add_multiple_member_invite',
+      {
+        accounts_id: 365418059,
+        companies_id: 365418059,
+        email_addresses: [
+          {
+            email_id: emailData,
+            first_name: 'aaa',
+            full_name: 'aaa',
+            last_name: '',
+            validate: false,
+          },
+        ],
+      }
+    );
+  }
+
+  logoutApi() {
+    console.log('im here++++++++');
+    return this.http.post('https://v2-api.bankopen.co/users/logout', {});
   }
 }
