@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { stringify } from 'querystring';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -10,13 +16,23 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
+  @ViewChild('drawer') drawerComponent!: MatDrawer;
   email = new FormControl('');
   teamMembers: any = [];
   addTeamMembers: any = [];
+  showLoader = false;
+  showLogoutLoader = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
+    console.log(this.drawerComponent);
+
+    this.fetchTeamMembers();
+  }
+
+  fetchTeamMembers() {
+    this.showLoader = true;
     const userName = localStorage.getItem('userName');
     let accountId;
     let companyId;
@@ -25,16 +41,17 @@ export class TeamComponent implements OnInit {
       companyId =
         JSON.parse(userName).data.account.data[0].company.data[0].companies_id;
     }
-
     this.authService.TeamApiCall(accountId, companyId).subscribe(
       {
         next: (res: any) => {
           this.teamMembers = res.data;
+          this.showLoader = false;
         },
       },
       {
         error: (err: any) => {
           console.log(err);
+          this.showLoader = false;
         },
       }
     );
@@ -56,6 +73,7 @@ export class TeamComponent implements OnInit {
   }
 
   onAddTeamMemberApi() {
+    this.showLoader = true;
     const emailData = this.email.value;
     const [firstName, lastName] = this.getFirstNameandLastName(emailData);
 
@@ -63,34 +81,33 @@ export class TeamComponent implements OnInit {
       {
         next: (res: any) => {
           this.addTeamMembers = res.data;
+          this.showLoader = false;
+          this.drawerComponent.close();
+          this.fetchTeamMembers();
         },
       },
       {
         error: (err: any) => {
-          console.log(err);
+          this.showLoader = false;
         },
       }
     );
   }
 
   onDeleteMemberApi(deleteMember: string | null) {
-    this.authService.deleteMemberApi(deleteMember).subscribe({
-      next: (res: any) => {
-        console.log('MEMBER DELETED');
-      },
-    });
+    this.authService.deleteMemberApi(deleteMember).subscribe({});
   }
   onLogout() {
-    console.log('ts file logout');
+    this.showLogoutLoader = true;
 
     this.authService.logoutApi().subscribe(
       () => {
-        console.log('+++++++++logout');
-        this.router.navigate(['/login']);
         localStorage.removeItem('userName');
+        this.showLogoutLoader = false;
+        this.router.navigate(['/login']);
       },
       () => {
-        console.log('Error++--');
+        this.showLogoutLoader = false;
       }
     );
   }

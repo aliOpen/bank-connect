@@ -53,3 +53,13 @@ mat-sidenav {
 .mat-drawer-opened + .overlay {
   display: block; /* show the overlay when the drawer is open */
 }
+
+.first-circle {
+  animation-delay: 0.5s;
+}
+.second-circle {
+  animation-delay: 0.5s;
+}
+.third-circle {
+  animation-delay: 0.5s;
+}

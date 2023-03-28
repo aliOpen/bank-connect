@@ -4,10 +4,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamComponent } from './team/team.component';
 import { AuthGuard } from './auth.guard';
 import { ViewComponent } from './view/view.component';
+import { LoginGuard } from './login.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,

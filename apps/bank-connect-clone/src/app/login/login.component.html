@@ -22,31 +22,33 @@
           <img
             class="bg-img-animation-1 absolute top-1/2 left-1/2 -translate-x-1/2"
             src="https://app.bankonnect.co/assets/images/oval/back.svg"
-            alt="bg-1"
+            alt="bg-animation-1"
           />
           <img
             class="bg-img-animation-2 absolute top-1/2 left-1/2 -translate-x-1/2"
             src="https://app.bankonnect.co/assets/images/oval/middle.svg"
-            alt="bg-2"
+            alt="bg-animation-2"
           />
           <img
             class="bg-img-animation-3 absolute top-1/2 left-1/2 -translate-x-1/2"
             src="https://app.bankonnect.co/assets/images/oval/front.svg"
-            alt="bg-3"
+            alt="bg-animation-3"
           />
         </div>
       </div>
       <!-- Card Session -->
       <div
-        class="bg-white mx-auto p-10 mt-16 z-99 relative"
+        class="bg-white mx-auto p-12 mt-16 z-99 relative"
         style="width: 450px"
       >
         <div class="w-96 mt-30 z-99">
-          <p class="text-3xl text-left pb-1">Log in</p>
-          <p class="text-left pb-2">Get ready to ace business banking 😎</p>
+          <p class="text-3xl text-left pb-2 font-light">Log in</p>
+          <p class="text-left pb-2 font-light">
+            Get ready to ace business banking 😎
+          </p>
 
           <div>
-            <mat-form-field class="w-full pt-2 text-left">
+            <mat-form-field class="w-full pt-4 text-left">
               <mat-label class="text-base"
                 >Your Email or Mobile Number</mat-label
               >
@@ -61,7 +63,7 @@
       <mat-error> Email is <strong>required</strong> </mat-error> -->
             </mat-form-field>
 
-            <mat-form-field class="w-full pt-10">
+            <mat-form-field class="w-full pt-5">
               <mat-label class="">Enter Password</mat-label>
               <div class="flex">
                 <input
@@ -90,10 +92,32 @@
 
           <p>
             <button
-              class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-full w-36 h-14"
+              class="bg-orange-400 text-white font-bold py-2 px-4 rounded-full w-36 h-14"
               type="submit"
+              [disabled]="showLoader"
             >
-              <div *ngIf="showLoader">Loading...</div>
+              <div *ngIf="showLoader">
+                <svg
+                  class="animate-spin h-8 w-6 mx-auto text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              </div>
               <div *ngIf="!showLoader">LOGIN</div>
             </button>
           </p>
@@ -102,19 +126,30 @@
               Protected by reCAPTCHA. Google
               <a
                 href="https://policies.google.com/privacy"
-                class="text-orange-300"
+                class="text-orange-400"
                 >Privacy Policy
               </a>
               &<a
                 href="https://policies.google.com/terms"
-                class="text-orange-300"
+                class="text-orange-400"
                 >Terms of Service apply.
               </a>
             </p>
           </div>
           <div class="pb-5">
-            New User? <a class="text-orange-300">Sign Up</a>
+            New User? <a class="text-orange-400">Sign Up</a>
           </div>
+          <!-- <div class="flex justify-center items-center bg-gray-900 h-screen">
+            <div
+              class="first-circle bg-white flex space-x-3 p-2 rounded-full justify-center items-center animate-pulse"
+            ></div>
+            <div
+              class="second-circle bg-white flex space-x-3 p-2 rounded-full justify-center items-center animate-pulse"
+            ></div>
+            <div
+              class="thrd-circle bg-white flex space-x-3 p-2 rounded-full justify-center items-center animate-pulse"
+            ></div>
+          </div> -->
           <!-- <div class="text-between-line text-xs mb-4 text-slate-500">OR</div>
           <div class="h-10 border border-gray-300 flex">
             <a href="https://imgbb.com/ "

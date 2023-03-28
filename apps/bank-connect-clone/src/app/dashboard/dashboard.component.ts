@@ -19,8 +19,8 @@ export class DashboardComponent {
     this.authService.logoutApi().subscribe(
       () => {
         console.log('+++++++++logout');
-        this.router.navigate(['/login']);
         localStorage.removeItem('userName');
+        this.router.navigate(['/login']);
       },
       () => {
         console.log('Error++--');

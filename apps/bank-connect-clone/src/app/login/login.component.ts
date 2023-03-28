@@ -54,11 +54,11 @@ export class LoginComponent {
               this.showLoader = false;
             },
             (error) => {
+              this.showLoader = false;
               // this.router.navigate(['/dashboard']);
               console.log('Error!!!!');
             }
           );
-          console.log('here', token);
         });
     });
   }
