@@ -14,13 +14,15 @@ export class DashboardComponent {
   }
 
   onLogout() {
+    console.log('ts file logout');
+
     this.authService.logoutApi().subscribe(
-      (data) => {
+      () => {
+        console.log('+++++++++logout');
         this.router.navigate(['/login']);
         localStorage.removeItem('userName');
-        console.log('+++++++++logout');
       },
-      (err) => {
+      () => {
         console.log('Error++--');
       }
     );

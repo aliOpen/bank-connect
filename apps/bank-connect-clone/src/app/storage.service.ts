@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StorageService {
-  saveDate(userData: string, data: any) {
+  saveData(userData: string, data: any) {
     localStorage.setItem(userData, JSON.stringify(data));
   }
   getToken() {

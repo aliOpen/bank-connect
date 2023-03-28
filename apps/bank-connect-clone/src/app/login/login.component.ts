@@ -50,7 +50,7 @@ export class LoginComponent {
             (data) => {
               this.router.navigate(['/dashboard']);
               console.log('get api data', data);
-              this.storageService.saveDate('userName', data);
+              this.storageService.saveData('userName', data);
               this.showLoader = false;
             },
             (error) => {

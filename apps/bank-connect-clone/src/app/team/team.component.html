@@ -27,7 +27,7 @@
       </div>
       <div class="flex justify-center space-x-8 py-1 px-3 h-8">
         <button
-          class="flex items-center justify-center border border-orange-400 text-orange-400 rounded-full text-sm"
+          class="flex items-center justify-center border border-orange-400 text-orange-400 rounded-full text-sm py-4 px-2"
         >
           <img
             class="w-6 pr-1"
@@ -86,7 +86,7 @@
             </div>
             <div>
               <hr />
-              <button mat-menu-item>Logout</button>
+              <button mat-menu-item (click)="onLogout()">Logout</button>
             </div>
           </mat-menu>
         </div>
@@ -261,7 +261,7 @@
         <!-- Added Card -->
         <div
           *ngFor="let teamMember of teamMembers"
-          class="h-full hover:shadow-lg bg-yellow-300"
+          class="h-full hover:shadow-lg"
         >
           <mat-card class="h-full">
             <mat-card-content class="">
@@ -282,7 +282,25 @@
                         {{ teamMember.emp_code }}
                       </div>
                     </div>
+                    <div class="temp-btn">
+                      <!-- <mat-icon
+                        class="bg-red-500"
+                        aria-hidden="false"
+                        aria-label="Example home icon"
+                        fontIcon="more_vert"
+                      ></mat-icon> -->
+
+                      <button
+                        class="bg-slate-50"
+                        (click)="
+                          onDeleteMemberApi(teamMember.team_member_details_id)
+                        "
+                      >
+                        delete
+                      </button>
+                    </div>
                   </div>
+
                   <div class="flex w-full">
                     <div class="mt-1">
                       <img
@@ -298,7 +316,7 @@
                         alt="team-logo"
                       />
                       <p>
-                        {{ teamMember.team_invite.data.role_name }}
+                        {{ teamMember.team_invite?.data?.role_name ?? 'NA' }}
                       </p>
                     </div>
                   </div>
@@ -318,14 +336,18 @@
                       src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/phone.png"
                       alt="phone-logo"
                     />
-                    <span>9999999999</span>
+                    <span>9876545621</span>
                   </div>
                 </div>
               </div>
             </mat-card-content>
           </mat-card>
           <mat-card>
-            <mat-drawer-container class="example-container" autosize>
+            <mat-drawer-container
+              class="example-container"
+              autosize
+              [hasBackdrop]="true"
+            >
               <div class="example-sidenav-content"></div>
             </mat-drawer-container>
           </mat-card>
@@ -376,6 +398,6 @@
     style="margin-top: 510px"
     (click)="onAddTeamMemberApi()"
   >
-    Preview
+    Proceed
   </button>
 </mat-drawer>
