@@ -18,7 +18,6 @@ const appRoutes: Routes = [
     path: 'team',
     component: TeamComponent,
     canActivate: [AuthGuard],
-    // children: [{ path: ':id', component: ViewComponent }],
   },
   { path: 'team/view/:id', component: ViewComponent, canActivate: [AuthGuard] },
 ];

@@ -21,6 +21,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { TokenInterceptor } from './token-interceptor.service';
 import { ViewComponent } from './view/view.component';
+import { HeaderComponent } from './header/header.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ViewComponent } from './view/view.component';
     DashboardComponent,
     TeamComponent,
     ViewComponent,
+    HeaderComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { ViewComponent } from './view/view.component';
     MatSelectModule,
     FormsModule,
   ],
+  exports: [HeaderComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],

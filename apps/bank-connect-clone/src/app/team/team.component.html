@@ -15,7 +15,8 @@
       ></div></div
   ></span>
 </div>
-<mat-toolbar
+<ali-assignments-header *ngIf="!showLogoutLoader"> </ali-assignments-header>
+<!-- <mat-toolbar
   *ngIf="!showLogoutLoader"
   class="flex justify-between !pl-0 !fixed z-10 h-20 bg-white border border-gray-100"
 >
@@ -31,12 +32,12 @@
       />
     </div>
   </div>
-  <!-- This is for the toggle of the dashboard uncomment it after the UI is completed -->
-  <!-- <div class="sidenav-toggle">
+  This is for the toggle of the dashboard uncomment it after the UI is completed
+  <div class="sidenav-toggle">
     <button mat-button (click)="sidenav.toggle()">
       <mat-icon fontIcon="menu"></mat-icon>
     </button>
-  </div> -->
+  </div> 
 
   <div class="w-full">
     <div class="flex justify-between">
@@ -70,7 +71,7 @@
         <div class="avatar">
           <div class="avatar-img mr-8">
             <a mat-button [matMenuTriggerFor]="menu">
-              <!-- <mat-icon fontIcon="account_circle"></mat-icon> -->
+              <mat-icon fontIcon="account_circle"></mat-icon>
 
               <img
                 class="w-10 rounded-full relative"
@@ -111,7 +112,7 @@
       </div>
     </div>
   </div>
-</mat-toolbar>
+</mat-toolbar> -->
 <mat-sidenav-container *ngIf="!showLogoutLoader">
   <mat-sidenav
     class="w-64"
