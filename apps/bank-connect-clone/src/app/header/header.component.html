@@ -13,14 +13,8 @@
 
   <div>
     <div class="flex items-center space-x-8">
-      <!-- <button
-        href="https://www.google.com/"
-        class="text-color-header text-white py-2 px-3 rounded-full text-sm"
-      >
-        Request For Demo
-      </button> -->
       <button
-        class="flex items-center justify-center py-1 px-3 border border-orange-400 text-orange-400 rounded-full text-sm"
+        class="flex items-center justify-center py-1 px-2 border border-orange-400 text-orange-400 rounded-full text-sm"
       >
         <img
           class="w-6 pr-1"
@@ -28,21 +22,27 @@
           alt=""
         />
 
-        <p class="!m-0">QUICK ACCESS</p>
+        <p class="!m-0 text-xs">QUICK ACCESS</p>
       </button>
-      <button>
-        <img
-          src="https://app.bankonnect.co/assets/mat-icons/phone-book.svg"
-          alt="vendor & customers logo"
-        />
-      </button>
-      <button>
-        <img
-          src="https://app.bankonnect.co/assets/mat-icons/notification.svg"
-          alt="notification logo"
-        />
-      </button>
-      <div class="avatar">
+      <div class="flex justify-center items-center space-x-5">
+        <button>
+          <img
+            src="https://app.bankonnect.co/assets/mat-icons/phone-book.svg"
+            alt="vendor & customers logo"
+          />
+        </button>
+        <button>
+          <img
+            src="https://app.bankonnect.co/assets/mat-icons/notification.svg"
+            alt="notification logo"
+          />
+        </button>
+      </div>
+
+      <div class="avatar flex justify-center items-center">
+        <div class="font-light text-base">
+          {{ userName }}
+        </div>
         <div class="avatar-img">
           <a mat-button [matMenuTriggerFor]="menu">
             <img
@@ -59,9 +59,14 @@
         </div>
         <mat-menu #menu="matMenu">
           <div>
-            <button mat-menu-item>Request For Demo</button>
             <button mat-menu-item (click)="onclickTeam()">Team</button>
-            <button mat-menu-item>Subscriptions</button>
+            <button mat-menu-item>
+              <!-- <img
+                src="https://app.bankonnect.co/assets/mat-icons/upgrade.svg"
+                alt="Subscriptions"
+              /> -->
+              Subscriptions
+            </button>
             <button mat-menu-item>Referrals</button>
             <button mat-menu-item>Settings</button>
             <hr />

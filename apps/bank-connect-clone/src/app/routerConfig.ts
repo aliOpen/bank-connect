@@ -3,7 +3,6 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamComponent } from './team/team.component';
 import { AuthGuard } from './auth.guard';
-import { ViewComponent } from './view/view.component';
 import { LoginGuard } from './login.guard';
 
 const appRoutes: Routes = [
@@ -19,6 +18,6 @@ const appRoutes: Routes = [
     component: TeamComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'team/view/:id', component: ViewComponent, canActivate: [AuthGuard] },
+  // { path: 'team/view/:id', component: ViewComponent, canActivate: [AuthGuard] },
 ];
 export default appRoutes;

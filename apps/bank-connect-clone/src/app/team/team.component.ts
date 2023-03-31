@@ -1,14 +1,9 @@
-import {
-  Component,
-  ComponentRef,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { TeamMember } from './team.model';
 
 @Component({
   selector: 'ali-assignments-team',
@@ -18,7 +13,7 @@ import { AuthService } from '../auth.service';
 export class TeamComponent implements OnInit {
   @ViewChild('drawer') drawerComponent!: MatDrawer;
   email = new FormControl('');
-  teamMembers: any = [];
+  teamMembers: TeamMember[] = [];
   addTeamMembers: any = [];
   showLoader = false;
   showLogoutLoader = false;
@@ -45,6 +40,7 @@ export class TeamComponent implements OnInit {
       {
         next: (res: any) => {
           this.teamMembers = res.data;
+          console.log(res.data);
           this.showLoader = false;
         },
       },
@@ -94,17 +90,18 @@ export class TeamComponent implements OnInit {
     );
   }
 
-  onDeleteMemberApi(deleteMember: string | null) {
+  onDeleteMemberApi(deleteMember: number | null) {
     this.authService.deleteMemberApi(deleteMember).subscribe({});
   }
   onLogout() {
     this.showLogoutLoader = true;
+    console.log(this.showLogoutLoader);
 
     this.authService.logoutApi().subscribe(
       () => {
         localStorage.removeItem('userName');
-        this.showLogoutLoader = false;
-        this.router.navigate(['/login']);
+        // this.showLogoutLoader = false;
+        // this.router.navigate(['/login']);
       },
       () => {
         this.showLogoutLoader = false;

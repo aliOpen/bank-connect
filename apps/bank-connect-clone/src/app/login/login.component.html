@@ -1,5 +1,5 @@
 <form
-  class="shadow-md h-screen body-color"
+  class="shadow-md h-screen body-color !pb-40"
   x
   [formGroup]="loginPageForm"
   (ngSubmit)="onSubmit()"
@@ -74,8 +74,8 @@
                   [ngModel]="password"
                 />
                 <button (click)="toggleShowPassword()" type="button">
-                  <!-- <mat-icon *ngIf="!showPassword"> visibility_off</mat-icon> -->
-                  <!-- <mat-icon *ngIf="showPassword"> visibility</mat-icon> -->
+                  <mat-icon *ngIf="!showPassword"> visibility_off</mat-icon>
+                  <mat-icon *ngIf="showPassword"> visibility</mat-icon>
                 </button>
               </div>
 
@@ -118,7 +118,7 @@
                   ></path>
                 </svg>
               </div>
-              <div *ngIf="!showLoader">LOGIN</div>
+              <div *ngIf="!showLoader" class="font-normal">LOGIN</div>
             </button>
           </p>
           <div>
@@ -129,7 +129,8 @@
                 class="text-orange-400"
                 >Privacy Policy
               </a>
-              &<a
+              &
+              <a
                 href="https://policies.google.com/terms"
                 class="text-orange-400"
                 >Terms of Service apply.
@@ -150,8 +151,8 @@
               class="thrd-circle bg-white flex space-x-3 p-2 rounded-full justify-center items-center animate-pulse"
             ></div>
           </div> -->
-          <!-- <div class="text-between-line text-xs mb-4 text-slate-500">OR</div>
-          <div class="h-10 border border-gray-300 flex">
+          <div class="text-between-line text-xs mb-4 text-slate-500">OR</div>
+          <div class="h-9 border border-gray-300 flex">
             <a href="https://imgbb.com/ "
               ><img
                 class="w-8 mt-1 ml-2 h-auto"
@@ -159,7 +160,7 @@
                 alt="google-logo"
             /></a>
             <span class="ml-24 mt-2">Sign in with Google</span>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>

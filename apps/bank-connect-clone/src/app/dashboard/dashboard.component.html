@@ -1,4 +1,5 @@
 <ali-assignments-header></ali-assignments-header>
+
 <mat-sidenav-container>
   <mat-sidenav
     class="w-64"
@@ -8,106 +9,7 @@
     [fixedInViewport]="true"
     [fixedTopGap]="65"
   >
-    <ul class="h-full px-10">
-      <div class="">
-        <li>
-          <a class="flex pt-10 p-3">
-            <span class="">
-              <img
-                class="mr-4"
-                src="https://app.bankonnect.co/assets/mat-icons/dashboard.svg"
-                alt="*"
-            /></span>
-            <p class="text-base text-slate-600 hover:text-orange-400">
-              Dashboard
-            </p>
-          </a>
-        </li>
-        <li>
-          <a href="" class="flex p-3">
-            <span>
-              <img
-                class="mr-4"
-                src="https://app.bankonnect.co/assets/mat-icons/Payments.svg"
-                alt="*
-            "
-            /></span>
-            <p class="text-base text-slate-600 hover:text-orange-400">
-              Payments
-            </p>
-          </a>
-        </li>
-        <li>
-          <a href="" class="flex p-3">
-            <span>
-              <img
-                class="mr-4"
-                src="https://app.bankonnect.co/assets/mat-icons/banking.svg"
-                alt="*"
-            /></span>
-            <p class="text-base text-slate-600 hover:text-orange-400">
-              Banking
-            </p>
-          </a>
-        </li>
-        <li>
-          <a href="" class="flex p-3">
-            <span>
-              <img
-                class="mr-4"
-                src="https://app.bankonnect.co/assets/mat-icons/accounting.svg"
-                alt="*"
-            /></span>
-            <p class="text-base text-slate-600 hover:text-orange-400">
-              Finance
-            </p>
-          </a>
-        </li>
-        <li>
-          <a href="" class="flex p-3">
-            <span>
-              <img
-                class="mr-4"
-                src="https://app.bankonnect.co/assets/mat-icons/Integrations.svg"
-                alt="*"
-            /></span>
-            <p class="text-base text-slate-600 hover:text-orange-400">
-              Integration
-            </p>
-          </a>
-        </li>
-        <li>
-          <a href="" class="flex p-3">
-            <span>
-              <img
-                class="mr-4"
-                src="https://app.bankonnect.co/assets/mat-icons/offer.svg"
-                alt="*"
-            /></span>
-            <p class="text-base text-slate-600 hover:text-orange-400">Offers</p>
-          </a>
-        </li>
-      </div>
-      <div class="flex">
-        <mat-card class="flex justify-center h-18 w-64">
-          <!-- <mat-card-content> </mat-card-content> -->
-          <div class="pl-2 pt-3 flex">
-            <img
-              class="h-8"
-              src="https://app.bankonnect.co/assets/images/finger-finger%20copy.png"
-              alt="finger-print"
-            />
-            <div>
-              <span class="kyc-text ml-5">
-                KYC Status
-
-                <span class="text-yellow-400 ml-3 block"> • kyc on hold</span>
-              </span>
-            </div>
-          </div>
-        </mat-card>
-      </div>
-    </ul>
+    <ali-assignments-sidenav></ali-assignments-sidenav>
   </mat-sidenav>
 
   <!-- icici-banner-content  -->
@@ -120,7 +22,7 @@
       />
     </div>
     <div class="text-3xl pb-8 !font-light content-txt-color">
-      <p>Hey username,</p>
+      <p>Hey {{ userName }} ,</p>
       <p>Ready to level up your business banking game?</p>
     </div>
 
@@ -138,7 +40,7 @@
 
         <div>
           <button
-            class="bg-orange-400 rounded-full w-30 px-5 py-2 text-white flex items-start"
+            class="bg-orange-400 rounded-full w-30 px-8 py-2 text-white flex items-start"
           >
             LET'S GO
           </button>

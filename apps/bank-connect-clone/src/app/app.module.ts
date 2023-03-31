@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { TokenInterceptor } from './token-interceptor.service';
-import { ViewComponent } from './view/view.component';
+
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
@@ -30,7 +30,6 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     LoginComponent,
     DashboardComponent,
     TeamComponent,
-    ViewComponent,
     HeaderComponent,
     SidenavComponent,
   ],
