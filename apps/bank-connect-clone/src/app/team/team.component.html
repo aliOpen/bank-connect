@@ -1,0 +1,250 @@
+<div
+  *ngIf="showLogoutLoader"
+  class="h-screen w-screen flex justify-center items-center"
+>
+  <span>
+    <div class="flex justify-center items-center bg-white h-screen">
+      <div
+        class="first-circle bg-slate-600 flex space-x-3 p-3 rounded-full justify-center items-center animate-pulse"
+      ></div>
+      <div
+        class="second-circle bg-slate-600 flex space-x-3 p-3 rounded-full justify-center items-center animate-pulse"
+      ></div>
+      <div
+        class="thrd-circle bg-slate-600 flex space-x-3 p-3 rounded-full justify-center items-center animate-pulse"
+      ></div></div
+  ></span>
+</div>
+<ali-assignments-header> </ali-assignments-header>
+
+<mat-sidenav-container *ngIf="!showLogoutLoader">
+  <mat-sidenav
+    class="w-64"
+    #sidenav
+    mode="side"
+    opened="true"
+    [fixedInViewport]="true"
+    [fixedTopGap]="65"
+  >
+    <ali-assignments-sidenav></ali-assignments-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="mt-20 bg-white">
+    <div class="content-container">
+      <div class="flex space-x-5 p-10 ml-10">
+        <mat-form-field appearance="fill">
+          <mat-label class="flex"> Name</mat-label>
+          <input matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="!h-1">
+          <mat-label class="flex">Department</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="!border border-none" appearance="outline">
+          <mat-label>Roles</mat-label>
+          <mat-select>
+            <mat-option value="one"> Owner </mat-option>
+            <mat-option value="two"> Admin </mat-option>
+            <mat-option value="one"> Employee </mat-option>
+            <mat-option value="two"> Manager </mat-option
+            ><mat-option value="one">Seller</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="showLoader" class="grid grid-cols-4 gap-6 mx-5">
+        <div class="h-48 skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      </div>
+
+      <div *ngIf="!showLoader" class="grid grid-cols-3 gap-6 mx-5">
+        <!-- To Add card -->
+        <div class="">
+          <mat-card
+            class="h-48 cursor-pointer hover:shadow-lg"
+            (click)="drawer.toggle()"
+          >
+            <mat-card-content class="h-full">
+              <div class="flex justify-center items-center w-full h-full">
+                <button type="button" (click)="(drawer.opened)" mat-button>
+                  <img
+                    class=""
+                    src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/add.png"
+                    alt="add_logo"
+                  />
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <!-- Added Card -->
+        <div
+          *ngFor="let teamMember of teamMembers"
+          class="h-full hover:shadow-lg"
+          [class.skeleton]="showLoader"
+        >
+          <mat-card class="h-full">
+            <mat-card-content class="">
+              <div>
+                <div class="">
+                  <div class="flex">
+                    <img
+                      class=""
+                      src="https://open-frontend-bucket.s3.amazonaws.com/open-money/open-hub/avatar.svg"
+                      alt="profile-photo"
+                    />
+
+                    <div class="ml-8">
+                      <div class="font-semibold">
+                        {{ teamMember.name }}
+                      </div>
+                      <div class="text-slate-400">
+                        {{ teamMember.emp_code }}
+                      </div>
+                    </div>
+                    <div class="temp-btn">
+                      <button
+                        (click)="
+                          onDeleteMemberApi(teamMember.team_member_details_id)
+                        "
+                      >
+                        <mat-icon
+                          class="bg-yellow-300"
+                          aria-hidden="false"
+                          aria-label="Example home icon"
+                          fontIcon="more_vert"
+                        ></mat-icon>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="flex w-full">
+                    <div class="mt-1">
+                      <img
+                        class="h-4 ml-16"
+                        src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/team.png"
+                        alt="team-logo"
+                      />
+                    </div>
+                    <div class="flex mt-1">
+                      <img
+                        class="h-4 ml-9"
+                        src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/star.png"
+                        alt="team-logo"
+                      />
+                      <p>
+                        {{ teamMember.team_invite?.data?.role_name ?? 'NA' }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-col mt-7">
+                  <div class="flex">
+                    <img
+                      class="h-3 mr-3 mt-1 mb-3"
+                      src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/email.png"
+                      alt="email-logo"
+                    />
+                    <span>{{ teamMember.email_id }}</span>
+                  </div>
+                  <div class="flex">
+                    <img
+                      class="h-3 mr-3 mt-1"
+                      src="https://open-frontend-bucket.s3.amazonaws.com/open-money/common/phone.png"
+                      alt="phone-logo"
+                    />
+                    <span>9876545621</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-drawer-container
+              class="example-container"
+              autosize
+              [hasBackdrop]="true"
+            >
+              <div class="example-sidenav-content"></div>
+            </mat-drawer-container>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Right-Side-Drawer -->
+<div class="overlay" *ngIf="drawer.opened"></div>
+
+<mat-drawer
+  position="end"
+  mode="side"
+  #drawer
+  class="example-sidenav h-screen !z-50"
+  style="width: 500px"
+  mode="side"
+>
+  <div class="flex justify-between">
+    <p class="!my-5 !ml-5">Create Member</p>
+    <button>
+      <img
+        class="!mr-5"
+        (click)="drawer.close()"
+        src="https://open-frontend-bucket.s3.amazonaws.com/open-money/collect/close.svg"
+        alt="cross-button"
+      />
+    </button>
+  </div>
+
+  <hr class="bg-black" />
+
+  <p class="!mt-5 1 !mb-10">Please enter comma separated email ids</p>
+
+  <mat-form-field class="w-full pt-2 pl-5">
+    <mat-label class="text-base">Enter Email</mat-label>
+    <input
+      class="appearance-none"
+      type="email"
+      [formControl]="email"
+      matInput
+    />
+  </mat-form-field>
+  <button
+    class="bg-orange-400 text-white w-full h-14"
+    style="margin-top: 510px"
+    (click)="onAddTeamMemberApi()"
+    [disabled]="showLoader"
+  >
+    <div *ngIf="showLoader">
+      <svg
+        class="animate-spin h-5 w-5 mx-auto text-white"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        ></circle>
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+    </div>
+    <div *ngIf="!showLoader">Proceed</div>
+  </button>
+</mat-drawer>

@@ -1,0 +1,65 @@
+mat-sidenav {
+  background-color: #f2f3f7 !important;
+}
+
+.icici-logo-color {
+  background-color: rgb(242, 243, 247) !important;
+}
+.acc-details {
+  background-color: rgb(238, 240, 246);
+}
+.image-container {
+  position: relative;
+}
+
+.hover-img {
+  display: none;
+}
+
+.card-wrapper:hover .hover-img {
+  display: block !important;
+}
+
+.text-color-header {
+  background-color: rgb(176, 42, 49);
+}
+.mat-drawer-side {
+  border: none;
+}
+.content-txt-color {
+  color: rgb(0, 0, 0, 0.85);
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled),
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+::ng-deep .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  z-index: 10; /* ensure the overlay is behind the drawer */
+}
+
+.mat-drawer-opened + .overlay {
+  display: block; /* show the overlay when the drawer is open */
+}
+
+.first-circle {
+  animation-delay: 0.5s;
+}
+.second-circle {
+  animation-delay: 0.5s;
+}
+.third-circle {
+  animation-delay: 0.5s;
+}

@@ -1,0 +1,91 @@
+<mat-toolbar
+  class="flex justify-between !pl-0 !fixed z-10 h-20 bg-white border border-gray-100"
+>
+  <div class="icici-logo-color h-full flex justify-center z-20 w-64">
+    <div class="icici-logo">
+      <img
+        class="w-40 pt-2.5"
+        src="https://open-frontend-bucket.s3.amazonaws.com/open-money/logo/open_bankonnect_logo_2.0.png"
+        alt="powered by icici logo"
+      />
+    </div>
+  </div>
+
+  <div>
+    <div class="flex items-center space-x-8">
+      <button
+        class="flex items-center justify-center py-1 px-2 border border-orange-400 text-orange-400 rounded-full text-sm"
+      >
+        <img
+          class="w-6 pr-1"
+          src="https://app.bankonnect.co/assets/mat-icons/quick_access.svg"
+          alt=""
+        />
+
+        <p class="!m-0 text-xs">QUICK ACCESS</p>
+      </button>
+      <div class="flex justify-center items-center space-x-5">
+        <button>
+          <img
+            src="https://app.bankonnect.co/assets/mat-icons/phone-book.svg"
+            alt="vendor & customers logo"
+          />
+        </button>
+        <button>
+          <img
+            src="https://app.bankonnect.co/assets/mat-icons/notification.svg"
+            alt="notification logo"
+          />
+        </button>
+      </div>
+
+      <div class="avatar flex justify-center items-center">
+        <div class="font-light text-base">
+          {{ userName }}
+        </div>
+        <div class="avatar-img">
+          <a mat-button [matMenuTriggerFor]="menu">
+            <img
+              class="w-10 rounded-full relative"
+              src="https://app.bankonnect.co/assets/images/avatar-male.png"
+              alt="Avatar_img"
+            />
+          </a>
+          <img
+            class="absolute right-5 top-7 z-10 w-4"
+            src="https://app.bankonnect.co/assets/mat-icons/ac_arrow.svg"
+            alt="arrow"
+          />
+        </div>
+        <mat-menu #menu="matMenu">
+          <div>
+            <button mat-menu-item (click)="onclickTeam()">Team</button>
+            <button mat-menu-item>
+              <!-- <img
+                src="https://app.bankonnect.co/assets/mat-icons/upgrade.svg"
+                alt="Subscriptions"
+              /> -->
+              Subscriptions
+            </button>
+            <button mat-menu-item>Referrals</button>
+            <button mat-menu-item>Settings</button>
+            <hr />
+          </div>
+          <div>
+            <button mat-menu-item>Blog</button>
+            <button mat-menu-item>Feedback</button>
+            <button mat-menu-item>Help</button>
+            <button mat-menu-item>Terms & Conditions</button>
+            <button mat-menu-item>Privacy</button>
+            <button mat-menu-item>App Version v4.22.115</button>
+            <hr />
+          </div>
+          <div>
+            <hr />
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
